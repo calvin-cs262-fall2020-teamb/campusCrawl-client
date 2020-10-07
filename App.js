@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, UrlTile, Overlay } from "react-native-maps";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Location from "expo-location";
 
@@ -26,9 +26,17 @@ export default function App() {
     text = JSON.stringify(location);
   }
 
+// Map image - can replace urlTile within MapView
+// <Overlay 
+//  image={'https://calvin.edu/dotAsset/184d0710-a659-4ef6-bc18-d0ac7d9cd057/'}
+//  bounds={ [[42.9406,-85.5909],[42.9347,-85.5849]] }
+// />
+
   return (
     <View style={styles.container}>
       <MapView
+        // region={this.state.region}
+        // onRegionChange={this.onRegionChange}
         style={styles.mapStyle}
         initialRegion={{
           latitude: 42.930731,
@@ -37,6 +45,10 @@ export default function App() {
           longitudeDelta: 0.0111,
         }}
       >
+        <UrlTile 
+          urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+        /> 
+
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
           title="Stop 1"
@@ -76,3 +88,4 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
 });
+
