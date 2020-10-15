@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile, Overlay } from "react-native-maps";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Location from "expo-location";
-
+import { globalStyles } from "./styles/global";
 
 
 
@@ -43,11 +43,11 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <MapView
         // region={this.state.region}
         // onRegionChange={this.onRegionChange}
-        style={styles.mapStyle}
+        style={globalStyles.mapStyle}
         showsUerLocation={true}
         followsUserLocation={true}
         region={{
@@ -79,9 +79,9 @@ export default function App() {
             
         </Marker>
       </MapView>
-      <View style={styles.welcome}>
+      <View style={globalStyles.welcome}>
         <Text style={{ fontSize: 25 }}>
-          Welcome To Calvin University Campus Crawl!{" "}
+          Welcome To Calvin University Campus Crawl!{text}{" "}
           {/* <Text style={styles.coordinates}>{text}</Text> */}
         </Text>
       </View>
@@ -89,28 +89,5 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  mapStyle: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
-  welcome: {
-    backgroundColor: "#fff",
-    position: "absolute",
-    bottom: 100,
-    left: 10,
-    right: 10,
-    height: 100,
-    borderWidth: 1,
-  },
-  coordinates: {
-    fontSize: 10,
-  },
-});
+
 
