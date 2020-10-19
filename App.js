@@ -59,16 +59,57 @@ export default function App() {
       >
         <UrlTile
           urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+
         />
+
+
+        /> 
+        
+        {/* Possibly condense?
+        <Marker
+          coordinate={[{ latitude: 42.930548, longitude: -85.58581 },
+            { latitude: 42.92965, longitude: -85.58762 }]}
+          title={"Stop 1","Stop 2"}
+          ></Marker>*/}
 
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
           title="Stop 1"
         ></Marker>
         <Marker
+
           coordinate={{ latitude: latitude, longitude: longitude }}
           pinColor={'blue'}
           title="You are here"
+
+          coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
+          title="Stop 2"
+        ></Marker>
+        <Marker
+          coordinate={{ latitude: 42.92930, longitude: -85.58845 }}
+          title="Stop 3"
+        ></Marker>
+        <Marker
+          coordinate={{ latitude: 42.93095, longitude: -85.58926 }}
+          title="Stop 4"
+        ></Marker>
+        <Marker
+          coordinate={{ latitude: 42.93301, longitude: -85.58917 }}
+          title="Stop 5"
+        ></Marker>
+        <Marker
+          coordinate={{ latitude: 42.93330, longitude: -85.58635 }}
+          title="Stop 6"
+        ></Marker>
+        <Marker
+          coordinate={{ latitude: 42.93125, longitude: -85.58701 }}
+          title="Stop 7"
+        ></Marker>
+        <Marker
+          coordinate={{latitude: latitude, longitude: longitude }}
+          pinColor = {'blue'}  
+          title="You are here"        
+
         >
           {/* <View style={{
                     backgroundColor:'white',
