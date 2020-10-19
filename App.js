@@ -21,7 +21,7 @@ export default function App() {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
-      setLatitude(location.coords.latitude); 
+      setLatitude(location.coords.latitude);
       setLongitude(location.coords.longitude)
     })();
   }, []);
@@ -31,14 +31,14 @@ export default function App() {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
-    
+
   }
 
-// Map image - can replace urlTile within MapView
-// <Overlay 
-//  image={'https://calvin.edu/dotAsset/184d0710-a659-4ef6-bc18-d0ac7d9cd057/'}
-//  bounds={ [[42.9406,-85.5909],[42.9347,-85.5849]] }
-// />
+  // Map image - can replace urlTile within MapView
+  // <Overlay
+  //  image={'https://calvin.edu/dotAsset/184d0710-a659-4ef6-bc18-d0ac7d9cd057/'}
+  //  bounds={ [[42.9406,-85.5909],[42.9347,-85.5849]] }
+  // />
 
 
 
@@ -57,8 +57,12 @@ export default function App() {
           longitudeDelta: 0.0031,
         }}
       >
-        <UrlTile 
+        <UrlTile
           urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+
+        />
+
+
         /> 
         
         {/* Possibly condense?
@@ -67,11 +71,17 @@ export default function App() {
             { latitude: 42.92965, longitude: -85.58762 }]}
           title={"Stop 1","Stop 2"}
           ></Marker>*/}
+
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
           title="Stop 1"
         ></Marker>
         <Marker
+
+          coordinate={{ latitude: latitude, longitude: longitude }}
+          pinColor={'blue'}
+          title="You are here"
+
           coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
           title="Stop 2"
         ></Marker>
@@ -99,6 +109,7 @@ export default function App() {
           coordinate={{latitude: latitude, longitude: longitude }}
           pinColor = {'blue'}  
           title="You are here"        
+
         >
           {/* <View style={{
                     backgroundColor:'white',
@@ -106,7 +117,7 @@ export default function App() {
                 }}>
                     <Text>You are here</Text>
                 </View> */}
-            
+
         </Marker>
       </MapView>
       <View style={styles.welcome}>
