@@ -21,10 +21,25 @@ export default function App() {
       setLocation(location);
       setLatitude(location.coords.latitude);
       setLongitude(location.coords.longitude);
+
+      // let newlocation = await Location.watchPositionAsync(
+      //   {
+      //     timeInterval: 5000,
+      //     distanceInterval: 1,
+      //     accuracy: 1,
+      //   },
+      //   (newLocation) => {
+      //     let { location } = newLocation;
+      //     setLocation(location);
+      //     setLatitude(location.coords.latitude);
+      //     setLongitude(location.coords.longitude);
+      //     // console.log(coords);
+      //   }
+      // );
     })();
   }, []);
 
-  let text = "hhhh..";
+  let text = "waiting..";
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
