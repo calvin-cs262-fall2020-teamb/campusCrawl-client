@@ -4,8 +4,6 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Location from "expo-location";
 import { globalStyles } from "./styles/global";
 
-
-
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -22,16 +20,15 @@ export default function App() {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude)
+      setLongitude(location.coords.longitude);
     })();
   }, []);
 
-  let text = "Waiting..";
+  let text = "hhhh..";
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
-
   }
 
   // Map image - can replace urlTile within MapView
@@ -39,8 +36,6 @@ export default function App() {
   //  image={'https://calvin.edu/dotAsset/184d0710-a659-4ef6-bc18-d0ac7d9cd057/'}
   //  bounds={ [[42.9406,-85.5909],[42.9347,-85.5849]] }
   // />
-
-
 
   return (
     <View style={globalStyles.container}>
@@ -58,13 +53,9 @@ export default function App() {
         }}
       >
         <UrlTile
-          urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
-
+          urlTemplate={"http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"}
         />
 
-
-        /> 
-        
         {/* Possibly condense?
         <Marker
           coordinate={[{ latitude: 42.930548, longitude: -85.58581 },
@@ -77,16 +68,18 @@ export default function App() {
           title="Stop 1"
         ></Marker>
         <Marker
-
           coordinate={{ latitude: latitude, longitude: longitude }}
-          pinColor={'blue'}
+          pinColor={"blue"}
           title="You are here"
+        ></Marker>
 
+        <Marker
           coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
           title="Stop 2"
         ></Marker>
+
         <Marker
-          coordinate={{ latitude: 42.92930, longitude: -85.58845 }}
+          coordinate={{ latitude: 42.9293, longitude: -85.58845 }}
           title="Stop 3"
         ></Marker>
         <Marker
@@ -98,7 +91,7 @@ export default function App() {
           title="Stop 5"
         ></Marker>
         <Marker
-          coordinate={{ latitude: 42.93330, longitude: -85.58635 }}
+          coordinate={{ latitude: 42.9333, longitude: -85.58635 }}
           title="Stop 6"
         ></Marker>
         <Marker
@@ -106,10 +99,9 @@ export default function App() {
           title="Stop 7"
         ></Marker>
         <Marker
-          coordinate={{latitude: latitude, longitude: longitude }}
-          pinColor = {'blue'}  
-          title="You are here"        
-
+          coordinate={{ latitude: latitude, longitude: longitude }}
+          pinColor={"blue"}
+          title="You are here"
         >
           {/* <View style={{
                     backgroundColor:'white',
@@ -117,7 +109,6 @@ export default function App() {
                 }}>
                     <Text>You are here</Text>
                 </View> */}
-
         </Marker>
       </MapView>
       <View style={globalStyles.welcome}>
@@ -129,6 +120,3 @@ export default function App() {
     </View>
   );
 }
-
-
-
