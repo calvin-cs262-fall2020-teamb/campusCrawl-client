@@ -17,25 +17,24 @@ export default function App() {
         setErrorMsg("Permission to access location was denied");
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude);
+      // let location = await Location.getCurrentPositionAsync({});
+      // setLocation(location);
+      // setLatitude(location.coords.latitude);
+      // setLongitude(location.coords.longitude);
 
-      // let newlocation = await Location.watchPositionAsync(
-      //   {
-      //     timeInterval: 5000,
-      //     distanceInterval: 1,
-      //     accuracy: 1,
-      //   },
-      //   (newLocation) => {
-      //     let { location } = newLocation;
-      //     setLocation(location);
-      //     setLatitude(location.coords.latitude);
-      //     setLongitude(location.coords.longitude);
-      //     // console.log(coords);
-      //   }
-      // );
+      let updating = await Location.watchPositionAsync(
+        {},
+        async (newlocation) => {
+          newlocation = await Location.getCurrentPositionAsync({
+            timeInterval: 4000,
+            accuracy: 4,
+          });
+          setLocation(newlocation);
+          setLatitude(newlocation.latitude);
+          setLongitude(newlocation.longitude);
+          // console.log(coords);
+        }
+      );
     })();
   }, []);
 
