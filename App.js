@@ -4,11 +4,18 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Location from "expo-location";
 import { globalStyles } from "./styles/global";
 
+import Hideandshowcomponent, { temp } from "./shared/Hideandshowcomponent";
+
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(42.930731);
   const [longitude, setLongitude] = useState(-85.585947);
+  const [show, setShow] = useState(true);
+
+  const changeShow = () => {
+    setShow(false);
+  };
 
   useEffect(() => {
     (async () => {
@@ -42,7 +49,7 @@ export default function App() {
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
-    text = JSON.stringify(location);
+    text = location.coords.longitude;
   }
 
   // Map image - can replace urlTile within MapView
@@ -81,11 +88,11 @@ export default function App() {
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
           title="Stop 1"
         ></Marker>
-        <Marker
+        {/* <Marker
           coordinate={{ latitude: latitude, longitude: longitude }}
           pinColor={"blue"}
           title="You are here"
-        ></Marker>
+        ></Marker> */}
 
         <Marker
           coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
@@ -117,20 +124,43 @@ export default function App() {
           pinColor={"blue"}
           title="You are here"
         >
-          {/* <View style={{
-                    backgroundColor:'white',
-                    borderWidth: 1,
-                }}>
-                    <Text>You are here</Text>
-                </View> */}
+          {/* <View
+            style={{
+              backgroundColor: "white",
+              borderWidth: 1,
+            }}
+          >
+            <Text>You are here</Text>
+          </View> */}
         </Marker>
       </MapView>
-      <View style={globalStyles.welcome}>
-        <Text style={{ fontSize: 25 }}>
-          Welcome To Calvin University Campus Crawl!{text}{" "}
-          {/* <Text style={styles.coordinates}>{text}</Text> */}
+      {console.log(show)}
+      {show ? <Hideandshowcomponent changeShow={changeShow} /> : null}
+
+      {/* uncomment HERE to see latitude */}
+      {/* <Text style={{ fontSize: 25 }}>
+        <Text style={styles.coordinates}>
+          {text} sdfjskhjdfskhdfshfdjkshfksdjhfksjhdfshd{" "}
         </Text>
-      </View>
+      </Text> */}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    zIndex: 5,
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  mapStyle: {
+    zIndex: 10,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+  },
+  coordinates: {
+    fontSize: 20,
+  },
+});

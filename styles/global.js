@@ -3,14 +3,19 @@ import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
   container: {
+    zIndex: 5,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   mapStyle: {
+    zIndex: 10,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+  coordinates: {
+    fontSize: 10,
   },
   welcome: {
     backgroundColor: "#fff",
@@ -20,8 +25,5 @@ export const globalStyles = StyleSheet.create({
     right: 10,
     height: 100,
     borderWidth: 1,
-  },
-  coordinates: {
-    fontSize: 10,
   },
 });
