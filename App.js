@@ -3,7 +3,7 @@ import MapView, { Marker, UrlTile, Overlay } from "react-native-maps";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Location from "expo-location";
 
-
+import Hideandshowcomponent, {temp} from './shared/Hideandshowcomponent'
 
 
 export default function App() {
@@ -11,6 +11,11 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(42.930731);
   const [longitude, setLongitude] = useState(-85.585947);
+  const [show, setShow] = useState(true);
+
+  const changeShow = () => {
+    setShow(false)
+  }
 
   useEffect(() => {
     (async () => {
@@ -31,7 +36,6 @@ export default function App() {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
-
   }
 
   // Map image - can replace urlTile within MapView
@@ -39,8 +43,6 @@ export default function App() {
   //  image={'https://calvin.edu/dotAsset/184d0710-a659-4ef6-bc18-d0ac7d9cd057/'}
   //  bounds={ [[42.9406,-85.5909],[42.9347,-85.5849]] }
   // />
-
-
 
   return (
     <View style={styles.container}>
@@ -59,11 +61,7 @@ export default function App() {
       >
         <UrlTile
           urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
-
         />
-
-
-        /> 
         
         {/* Possibly condense?
         <Marker
@@ -109,7 +107,6 @@ export default function App() {
           coordinate={{latitude: latitude, longitude: longitude }}
           pinColor = {'blue'}  
           title="You are here"        
-
         >
           {/* <View style={{
                     backgroundColor:'white',
@@ -120,35 +117,25 @@ export default function App() {
 
         </Marker>
       </MapView>
-      <View style={styles.welcome}>
-        <Text style={{ fontSize: 25 }}>
-          Welcome To Calvin University Campus Crawl!{" "}
-          {/* <Text style={styles.coordinates}>{text}</Text> */}
-        </Text>
-      </View>
+      {console.log(show)}
+
+      {show ? <Hideandshowcomponent changeShow={changeShow}/> : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    zIndex: 5,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   mapStyle: {
+    zIndex: 10,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-  },
-  welcome: {
-    backgroundColor: "#fff",
-    position: "absolute",
-    bottom: 100,
-    left: 10,
-    right: 10,
-    height: 100,
-    borderWidth: 1,
   },
   coordinates: {
     fontSize: 10,
