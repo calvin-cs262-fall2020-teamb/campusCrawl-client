@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile, Overlay } from "react-native-maps";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Modal } from "react-native";
 import * as Location from "expo-location";
 
+import Navbar from './shared/navbar';
+import LocationInfo from './shared/LocationInfo';
 import Hideandshowcomponent, {temp} from './shared/Hideandshowcomponent'
-
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -12,9 +13,15 @@ export default function App() {
   const [latitude, setLatitude] = useState(42.930731);
   const [longitude, setLongitude] = useState(-85.585947);
   const [show, setShow] = useState(true);
+  const [showInfo, setInfoShow] = useState(false);
 
   const changeShow = () => {
     setShow(false)
+  }
+
+  const setRegion = (lat, long) =>{
+    setLatitude(lat),
+    setLongitude(long)
   }
 
   useEffect(() => {
@@ -47,8 +54,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <MapView
-        // region={this.state.region}
-        // onRegionChange={this.onRegionChange}
         style={styles.mapStyle}
         showsUerLocation={true}
         followsUserLocation={true}
@@ -73,6 +78,7 @@ export default function App() {
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
           title="Stop 1"
+          onPress={() => {setInfoShow(true)}}
         ></Marker>
         <Marker
 
@@ -119,7 +125,13 @@ export default function App() {
       </MapView>
       {console.log(show)}
 
-      {show ? <Hideandshowcomponent changeShow={changeShow}/> : null}
+      {/* {show ? <Hideandshowcomponent changeShow={changeShow}/> : null} */}
+      {/* <Navbar setRegion={setRegion}/> */}
+
+      <Modal visible={showInfo} transparent={true}>
+                <LocationInfo/>
+      </Modal>
+                
     </View>
   );
 }
