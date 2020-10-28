@@ -3,7 +3,8 @@ import MapView, { Marker, UrlTile, Overlay } from "react-native-maps";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Location from "expo-location";
 
-import Hideandshowcomponent, {temp} from './shared/Hideandshowcomponent'
+import Hideandshowcomponent from './shared/Hideandshowcomponent'
+import Tourfooter from "./shared/Tourfooter";
 
 
 export default function App() {
@@ -11,11 +12,11 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(42.930731);
   const [longitude, setLongitude] = useState(-85.585947);
-  const [show, setShow] = useState(true);
+  /*const [show, setShow] = useState(true);
 
   const changeShow = () => {
     setShow(false)
-  }
+  }*/
 
   useEffect(() => {
     (async () => {
@@ -63,12 +64,6 @@ export default function App() {
           urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
         />
         
-        {/* Possibly condense?
-        <Marker
-          coordinate={[{ latitude: 42.930548, longitude: -85.58581 },
-            { latitude: 42.92965, longitude: -85.58762 }]}
-          title={"Stop 1","Stop 2"}
-          ></Marker>*/}
 
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
@@ -117,12 +112,14 @@ export default function App() {
 
         </Marker>
       </MapView>
-      {console.log(show)}
 
-      {show ? <Hideandshowcomponent changeShow={changeShow}/> : null}
+      <Hideandshowcomponent/>
+      <Tourfooter/>
     </View>
   );
 }
+
+// {show ? <Hideandshowcomponent changeShow={changeShow}/> : null}
 
 const styles = StyleSheet.create({
   container: {

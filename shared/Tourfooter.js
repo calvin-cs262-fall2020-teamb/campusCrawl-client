@@ -2,35 +2,24 @@ import React, { useState, } from "react";
 import { StyleSheet, Text, View, Button, Platform, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
+import Hideandshowcomponent from './Hideandshowcomponent'
 
 // export default function Hideandshowcomponent({changeShow}) {
+export default function Tourfooter() {
 
-export default function Hideandshowcomponent(showFooter) {
+    const [footer, setFooter] = useState(false);
 
-    const [welcomeScreen, setWelcomeScreen] = useState(true);
+    {Hideandshowcomponent() ? setFooter(true): null}
 
-    const pressHandler = () => {
-      setWelcomeScreen(false);
-      showFooter = true;
-    }
 
     return (
-      <Modal visible={welcomeScreen} animationType={'slide'} transparent={true}>
-        <View style={styles.welcome}>
-        <Text style={{ fontSize: 25, color: '#DC0000', }}>
-            Welcome To Campus Crawl!
-          </Text>
-          <View style={{borderBottomColor: '#A9A9A9', borderBottomWidth: 1, paddingBottom: 40,}}>  
-            <Text style={{ fontSize: 15, paddingTop: 20, fontStyle: 'italic' }}>
-              Calvin University's virtual campus tour app
-            </Text>
-          </View>
+      <Modal visible={footer} animationType={'slide'} transparent={true}>
+        <View style={styles.footer}>
           <View style={styles.button1}>
-            <Button title='Get Started!' color='#000' onPress={pressHandler}/>
+            <Button title='Start Tour' color='#000' onPress={() => setFooter(false)}/>
           </View>  
         </View>
       </Modal>
-
         /* <View style={styles.welcome}>
           <Text style={{ fontSize: 25, color: '#DC0000', }}>
             Welcome To Campus Crawl!
@@ -114,4 +103,8 @@ const styles = StyleSheet.create({
       flex: 1,
       marginTop: 100,
     },
+    footer: {
+      flex: 1,
+      backgroundColor: '#000',
+    }
   });
