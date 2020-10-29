@@ -5,13 +5,14 @@ import { AntDesign } from '@expo/vector-icons';
 
 // export default function Hideandshowcomponent({changeShow}) {
 
-export default function Hideandshowcomponent(showFooter) {
+// export default function Hideandshowcomponent(showFooter) {
+export default function Hideandshowcomponent() {
 
     const [welcomeScreen, setWelcomeScreen] = useState(true);
 
     const pressHandler = () => {
       setWelcomeScreen(false);
-      showFooter = true;
+      // showFooter = true;
     }
 
     return (
