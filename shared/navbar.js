@@ -1,6 +1,6 @@
 import React, { useState, } from "react";
 import { StyleSheet, Text, View, Button, Platform, TouchableOpacity, Dimensions, Modal } from "react-native";
-
+import {Row, Grid} from "react-native-easy-grid";
 var width = Dimensions.get('window').width;
 
 export default function Navbar({setRegion}){
@@ -8,8 +8,9 @@ export default function Navbar({setRegion}){
     const [started, setStart] = useState(false);
 
     return(
+        
         <View style={styles.bar}>
-            <Modal visible={!started} transparent={true}>
+            <Modal visible={!started} styles={styles.modal}>
                 <TouchableOpacity style={styles.start} onPress={() => { setRegion(42.930548, -85.58581); setStart(true) }}>
                     <Text style={{ fontSize: 23, color: 'white', }}>Start Tour</Text>
                 </TouchableOpacity>
@@ -20,6 +21,7 @@ export default function Navbar({setRegion}){
                 </TouchableOpacity>
             </Modal>
         </View>
+
     );
 }
 
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     
       bottom: 0,
+      flex: 1,
       height: 90,
       width: width,
       backgroundColor: "white",
@@ -46,6 +49,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
       
     },
+    modal: {
+        margin: 0,
+        flex: 0
+    }
+
 
 });
 

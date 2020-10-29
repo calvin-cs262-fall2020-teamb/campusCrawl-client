@@ -126,7 +126,7 @@ export default function App() {
       {console.log(show)}
 
       {/* {show ? <Hideandshowcomponent changeShow={changeShow}/> : null} */}
-      {/* <Navbar setRegion={setRegion}/> */}
+      <Navbar setRegion={setRegion}/>
 
       <Modal visible={showInfo} transparent={true}>
                 <LocationInfo/>
