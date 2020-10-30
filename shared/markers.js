@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import Start from "./shared/startButton";
-import LocationInfo from "./shared/LocationInfo";
-import DestinationGuide from "./shared/DestinationGuide";
+import Start from "./startButton";
+import LocationInfo from "./LocationInfo";
+import DestinationGuide from "./DestinationGuide";
 
-import Hideandshowcomponent from "./shared/Hideandshowcomponent";
-import Tourfooter from "./shared/Tourfooter";
+import Hideandshowcomponent from "./Hideandshowcomponent";
+import Tourfooter from "./Tourfooter";
+import { globalStyles } from "../styles/global";
 
 export default function Markers() {
   const [location, setLocation] = useState(null);
@@ -61,7 +62,7 @@ export default function Markers() {
 
   return (
     <MapView
-      style={styles.mapStyle}
+      style={globalStyles.mapStyle}
       showsUerLocation={true}
       followsUserLocation={true}
       region={{
@@ -153,31 +154,13 @@ export default function Markers() {
         title="You are here"
       ></Marker>
 
-      {console.log(inTransit)}
+      {/* {console.log(inTransit)}
 
       {started ? null : <Start startTour={startTour} />}
       {inTransit ? <DestinationGuide destination={id + 1} /> : null}
       {showInfo ? (
         <LocationInfo nextStop={nextStop} endTour={endTour} id={id} />
-      ) : null}
+      ) : null} */}
     </MapView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    zIndex: 5,
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  mapStyle: {
-    zIndex: 10,
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
-  coordinates: {
-    fontSize: 10,
-  },
-});
