@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
+import Start from "./shared/startButton";
+import LocationInfo from "./shared/LocationInfo";
+import DestinationGuide from "./shared/DestinationGuide";
+
+import Hideandshowcomponent from "./shared/Hideandshowcomponent";
+import Tourfooter from "./shared/Tourfooter";
 
 export default function Markers() {
   const [location, setLocation] = useState(null);
@@ -12,6 +18,25 @@ export default function Markers() {
   const [started, setStart] = useState(false);
   const [id, setID] = useState(0);
   const [inTransit, setTransitStatus] = useState(false);
+
+  const setRegion = (lat, long) => {
+    setLatitude(lat), setLongitude(long);
+  };
+  const startTour = () => {
+    setStart(true);
+    setRegion(42.930548, -85.58581);
+    setTransitStatus(true);
+  };
+  const nextStop = () => {
+    setTransitStatus(true);
+    setInfoShow(false);
+  };
+  const endTour = () => {
+    setStart(false);
+    setInfoShow(false);
+    setTransitStatus(false);
+    setID(0);
+  };
 
   useEffect(() => {
     (async () => {
@@ -127,6 +152,14 @@ export default function Markers() {
         pinColor={"blue"}
         title="You are here"
       ></Marker>
+
+      {console.log(inTransit)}
+
+      {started ? null : <Start startTour={startTour} />}
+      {inTransit ? <DestinationGuide destination={id + 1} /> : null}
+      {showInfo ? (
+        <LocationInfo nextStop={nextStop} endTour={endTour} id={id} />
+      ) : null}
     </MapView>
   );
 }
