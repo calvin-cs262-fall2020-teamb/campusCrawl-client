@@ -3,27 +3,39 @@ import MapView, { Marker, UrlTile, Overlay } from "react-native-maps";
 import { StyleSheet, Text, View, Dimensions, Modal } from "react-native";
 import * as Location from "expo-location";
 
-import Navbar from './shared/navbar';
+import Start from './shared/startButton';
 import LocationInfo from './shared/LocationInfo';
-import Hideandshowcomponent, {temp} from './shared/Hideandshowcomponent'
+import DestinationGuide from './shared/DestinationGuide'
 
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(42.930731);
   const [longitude, setLongitude] = useState(-85.585947);
-  const [show, setShow] = useState(true);
   const [showInfo, setInfoShow] = useState(false);
-
-  const changeShow = () => {
-    setShow(false)
-  }
+  const [started, setStart] = useState(false);
+  const [id, setID] = useState(0);
+  const [inTransit, setTransitStatus] = useState(false);
 
   const setRegion = (lat, long) =>{
     setLatitude(lat),
     setLongitude(long)
   }
-
+  const startTour = () => {
+    setStart(true)
+    setRegion(42.930548, -85.58581)
+    setTransitStatus(true)
+  }
+  const nextStop =() => {
+    setTransitStatus(true)
+    setInfoShow(false)
+  }
+  const endTour = () => {
+    setStart(false)
+    setInfoShow(false)
+    setTransitStatus(false)
+    setID(0)
+  }
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
@@ -44,12 +56,6 @@ export default function App() {
   } else if (location) {
     text = JSON.stringify(location);
   }
-
-  // Map image - can replace urlTile within MapView
-  // <Overlay
-  //  image={'https://calvin.edu/dotAsset/184d0710-a659-4ef6-bc18-d0ac7d9cd057/'}
-  //  bounds={ [[42.9406,-85.5909],[42.9347,-85.5849]] }
-  // />
 
   return (
     <View style={styles.container}>
@@ -78,59 +84,53 @@ export default function App() {
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
           title="Stop 1"
-          onPress={() => {setInfoShow(true)}}
+          onPress={() => {setTransitStatus(false), setID(1), setInfoShow(true), setLatitude(42.930548), setLongitude(-85.58581)}}
         ></Marker>
+
         <Marker
-
-          coordinate={{ latitude: latitude, longitude: longitude }}
-          pinColor={'blue'}
-          title="You are here"
-
           coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
           title="Stop 2"
+          onPress={() => {setID(2), setInfoShow(true), setLatitude(42.92965), setLongitude(-85.58762)}}
         ></Marker>
         <Marker
           coordinate={{ latitude: 42.92930, longitude: -85.58845 }}
           title="Stop 3"
+          onPress={() => {setID(3), setInfoShow(true), setLatitude(42.92930), setLongitude(-85.58845)}}
+
         ></Marker>
         <Marker
           coordinate={{ latitude: 42.93095, longitude: -85.58926 }}
           title="Stop 4"
+          onPress={() => {setID(4), setInfoShow(true), setLatitude(42.93095), setLongitude(-85.58926)}}
         ></Marker>
         <Marker
           coordinate={{ latitude: 42.93301, longitude: -85.58917 }}
           title="Stop 5"
+          onPress={() => {setID(5), setInfoShow(true), setLatitude(42.93301), setLongitude(-85.58917)}}
         ></Marker>
         <Marker
           coordinate={{ latitude: 42.93330, longitude: -85.58635 }}
           title="Stop 6"
+          onPress={() => {setID(6), setInfoShow(true), setLatitude(42.93330), setLongitude(-85.58635)}}
         ></Marker>
         <Marker
           coordinate={{ latitude: 42.93125, longitude: -85.58701 }}
           title="Stop 7"
+          onPress={() => {setID(7), setInfoShow(true), setLatitude(42.93125), setLongitude(-85.58701)}}
         ></Marker>
         <Marker
           coordinate={{latitude: latitude, longitude: longitude }}
           pinColor = {'blue'}  
           title="You are here"        
         >
-          {/* <View style={{
-                    backgroundColor:'white',
-                    borderWidth: 1,
-                }}>
-                    <Text>You are here</Text>
-                </View> */}
 
         </Marker>
       </MapView>
-      {console.log(show)}
+      {console.log(inTransit)}
 
-      {/* {show ? <Hideandshowcomponent changeShow={changeShow}/> : null} */}
-      <Navbar setRegion={setRegion}/>
-
-      <Modal visible={showInfo} transparent={true}>
-                <LocationInfo/>
-      </Modal>
+      {started ? null : <Start startTour={startTour}/>}
+      {inTransit ? <DestinationGuide destination={id+1}/> : null}
+      {showInfo ? <LocationInfo nextStop={nextStop} endTour={endTour} id={id}/> : null}
                 
     </View>
   );
