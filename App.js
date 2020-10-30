@@ -6,6 +6,9 @@ import * as Location from "expo-location";
 import Start from './shared/startButton';
 import LocationInfo from './shared/LocationInfo';
 import DestinationGuide from './shared/DestinationGuide'
+import Hideandshowcomponent from './shared/Hideandshowcomponent'
+import Tourfooter from "./shared/Tourfooter";
+
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -36,6 +39,12 @@ export default function App() {
     setTransitStatus(false)
     setID(0)
   }
+  /*const [show, setShow] = useState(true);
+
+  const changeShow = () => {
+    setShow(false)
+  }*/
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
@@ -74,12 +83,6 @@ export default function App() {
           urlTemplate={'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'}
         />
         
-        {/* Possibly condense?
-        <Marker
-          coordinate={[{ latitude: 42.930548, longitude: -85.58581 },
-            { latitude: 42.92965, longitude: -85.58762 }]}
-          title={"Stop 1","Stop 2"}
-          ></Marker>*/}
 
         <Marker
           coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
@@ -132,9 +135,14 @@ export default function App() {
       {inTransit ? <DestinationGuide destination={id+1}/> : null}
       {showInfo ? <LocationInfo nextStop={nextStop} endTour={endTour} id={id}/> : null}
                 
+
+      <Hideandshowcomponent/>
+      <Tourfooter/>
     </View>
   );
 }
+
+// {show ? <Hideandshowcomponent changeShow={changeShow}/> : null}
 
 const styles = StyleSheet.create({
   container: {
