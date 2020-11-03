@@ -89,7 +89,6 @@ export default function App() {
           title="Stop 1"
           onPress={() => {setTransitStatus(false), setID(1), setInfoShow(true), setLatitude(42.930548), setLongitude(-85.58581)}}
         ></Marker>
-
         <Marker
           coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
           title="Stop 2"

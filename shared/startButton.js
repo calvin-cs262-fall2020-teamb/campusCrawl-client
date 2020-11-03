@@ -6,7 +6,7 @@ export default function Start({ startTour }){
     return( 
         <View style={styles.bar}>            
                 <TouchableOpacity style={styles.start} onPress={() => { startTour(); }}>
-                    <Text style={{ fontSize: 23, color: 'white', }}>Start Tour</Text>
+                    <Text style={{ fontSize: 23, color: '#000',alignSelf: 'center' }}>Start Tour</Text>
                 </TouchableOpacity>
         </View>
     );
@@ -14,25 +14,24 @@ export default function Start({ startTour }){
 
 const styles = StyleSheet.create({
     bar: {
-    zIndex: 15,
-    position: 'absolute',
-    
-      bottom: 0,
-      flex: 1,
-      height: 90,
-      width: width,
-      backgroundColor: "white",
+        zIndex: 15,
+        position: 'absolute',
+        bottom: 0,
+        flex: 1,
+        height: 100,
+        width: width,
+        backgroundColor: "#800000",
     },
     start: {
         zIndex: 20,
         zIndex: 25,
         position: 'absolute',
-        bottom: 22,
+        bottom: 35,
         width: 125,
-        height: 42,
+        height: 46,
         alignSelf: 'center',
         justifyContent: 'center',
-        backgroundColor: '#A9A9A9',
+        backgroundColor: '#FFD700',
         borderRadius: 10,
     },
 });
