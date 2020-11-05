@@ -3,6 +3,7 @@ import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image } from 'rea
 
 var width = Dimensions.get('window').width;
 
+{/*
 export default function LocationInfo({nextStop, endTour, id}) {
     const [locations, setLocations] = useState([
         { id: 1, name: "Welcome to the \nCovenant Fine Arts Center", description: 'The CFAC serves as the host to many of Calvin’s events including the January Series and student activities. It’s also home to the English and Music departments, Center Art Gallery, Event Services, and the Calvin Box Office. The Covenant Fine Arts Center houses two large performance spaces and an art gallery.', 
@@ -21,10 +22,16 @@ export default function LocationInfo({nextStop, endTour, id}) {
         image: 'https://calvinchimes.org/wp-content/uploads/2014/01/johnnys-1495x1000.jpg'}        
     ])
 
-    const filtered = locations.filter(item => item.id === id)
+    */}
+    
+    
+export default function LocationInfo({locations, nextStop, endTour, id}) {
+
+    const tourStop = locations.filter(item => item.id === id)[0]
 
     return (
         <View style={styles.infoContainer}>
+      {/*
             <View style={styles.titlewrap}>
                 <Text style={styles.title}>{filtered[0].name}</Text>
                 {/*<Text style={styles.title}>{filtered[0].name}</Text>*/}
@@ -35,6 +42,10 @@ export default function LocationInfo({nextStop, endTour, id}) {
                 <Text style={styles.info}>{filtered[0].description}</Text>
             </View>
             
+*/}
+
+
+            <Text style={{ fontSize: 30}}>Welcome to {tourStop.name}</Text>
 
                  {/* show Next Stop button if not last stop  */}
             {locations.filter(item => item.id === id+1)[0] ? 
