@@ -1,13 +1,30 @@
 import React, { useState, } from "react";
-import { StyleSheet, Text, View, Button, Platform, TouchableOpacity, Dimensions, Modal } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 var width = Dimensions.get('window').width;
 
-export default function DestinationGuide({ destination }){
+export default function DestinationGuide({ locations, id, endTour, setID }){
+
+    const tourStop  = locations.filter(item => item.id === id+1)[0]
+    console.log(id)
+
     return(
         <View style={styles.bar}>
-            <Text style={{  fontSize: 23, color: 'black', }}>Go to stop {destination}</Text>
+            {/*not sure why this conditional is needed because it seems like it would always be true. but it shows an error when you press the last stop otherwise. */}
+            {tourStop ? 
+            <Text style={{  fontSize: 23, color: 'black', }}>Go to {tourStop.name}</Text>: null}
+            <Text style={{ fontSize: 15, color: 'blue'}}> stop {id+1} of 7</Text>
             <Text style={{ fontSize: 14 }}>In the future, the destination name and a route to follow will be shown. For now, just scroll to the marker and tap it.</Text>
+            <TouchableOpacity style={[styles.button, {left: 20}]} onPress={() => { endTour(); }}>
+                <Text style={{ fontSize: 23, color: 'black', }}>End Tour</Text>
+            </TouchableOpacity>
+
+            {/*Only show skip stop if it's not the last stop (because endTour does what we want and otherwise skip stop will show a nameless destinationGuide screen) */}
+            {locations.filter(item => item.id === id+2)[0] ? 
+            <TouchableOpacity style={[styles.button, {right: 20}]} onPress={() => { setID(id+1); }}>
+                    <Text style={{ fontSize: 23, color: 'black', }}>Skip Stop</Text>
+            </TouchableOpacity> : null}
         </View>
+        
     );
 }
 
@@ -18,7 +35,7 @@ const styles = StyleSheet.create({
     
       bottom: 0,
       flex: 1,
-      height: 90,
+      height: 175,
       width: width,
       backgroundColor: "white",
     },
@@ -35,6 +52,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
       
     },
+    button: {
+        position: 'absolute',
+        bottom: 30,
+    }
 
 });
-
