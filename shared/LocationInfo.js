@@ -31,18 +31,16 @@ export default function LocationInfo({locations, nextStop, endTour, id}) {
 
     return (
         <View style={styles.infoContainer}>
-      {/*
+        {/*
             <View style={styles.titlewrap}>
                 <Text style={styles.title}>{filtered[0].name}</Text>
-                {/*<Text style={styles.title}>{filtered[0].name}</Text>*/}
+                            <Text style={styles.title}>{filtered[0].name}</Text>
             </View>
             <Image style={styles.image} source={{uri: filtered[0].image}}/>
             <Image style={styles.image2} source={require('../images/background3.jpeg')}/>
             <View style={styles.infowrap}>
                 <Text style={styles.info}>{filtered[0].description}</Text>
-            </View>
-            
-*/}
+            </View> */}
 
 
             <Text style={{ fontSize: 30}}>Welcome to {tourStop.name}</Text>

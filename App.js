@@ -7,6 +7,11 @@ import Markers from "./shared/markers";
 export default function App() {
   return (
 
+    <View style={globalStyles.container}>
+      <Markers />
+    </View>
+  );
+}
     {/*
     
     <View style={styles.container}>
@@ -85,11 +90,6 @@ export default function App() {
         
         
         
-    <View style={globalStyles.container}>
-      <Markers />
-       master
-    </View>
-  );
-}
+
 
 // {show ? <Hideandshowcomponent changeShow={changeShow}/> : null}
