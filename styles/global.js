@@ -17,6 +17,8 @@ export const globalStyles = StyleSheet.create({
   coordinates: {
     fontSize: 10,
   },
+
+  // learn modal
   modalToggle: {
     zIndex: 15,
     position: "absolute",

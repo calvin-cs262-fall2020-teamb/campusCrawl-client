@@ -233,8 +233,7 @@ export default function Markers() {
               2. The app will guide you to the first tour stop{"\n"}
               3. Upon arrival, you will see an information page pop up{"\n"}
               4. You can swipe up to see more information (and other fun facts) about that stop{"\n"}
-              5. When you finish exploring that location, press either Next Stop to continue the tour
-              or End Tour to finish the tour{"\n"}
+              5. When you finish exploring that location, press Next Stop to continue the tour{"\n"}
               {"\n"}
               * You can end the tour at any time by pressing End Tour on the bottom left{"\n"}
               * To skip a particular stop, press Skip Stop and move on to the next stop.
