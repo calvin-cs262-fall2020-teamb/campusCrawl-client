@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Modal } from "react";
+import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Modal } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
@@ -220,6 +220,8 @@ export default function Markers() {
           </Text>
         </View>
       </Modal>
+
+      {/* info button to toggle Modal */}
       <TouchableOpacity style={globalStyles.modalToggle}>
         <View>
           <MaterialIcons
