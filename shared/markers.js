@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Modal } from "react-native";
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Modal, Image } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
 import { MaterialIcons } from '@expo/vector-icons';
 
-import Hideandshowcomponent from "./Hideandshowcomponent";
+import WelcomeScreen from "./WelcomeScreen";
 import Tourfooter from "./Tourfooter";
 import { globalStyles } from "../styles/global";
 
@@ -206,6 +206,7 @@ export default function Markers() {
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
 
+      {/* modal with text formatted */}
       <Modal visible={learnMore} animationType={'slide'} transparent={true} style={globalStyles.learnModal}>
         <View style={globalStyles.insideLearn}>
           <MaterialIcons
@@ -215,9 +216,31 @@ export default function Markers() {
             onPress={() => setLearnMore(false)}
             style={globalStyles.closeLearn}
           />
-          <Text style={globalStyles.learnContent}>
-            Learn More!
+          <Text style={globalStyles.learnHeader}>
+            About Campus Crawl
           </Text>
+          <View style={globalStyles.learnText}>
+            <Image style={globalStyles.calvinImage} source={require('../images/calvincampus.jpg')} />
+            <Text style={globalStyles.infoText}>
+              Campus Crawl is desinged to give you a meaningful experience of Calvin University's campus.
+              This self-guided tour takes you to all the important buildings and locations you will need for your college life.
+            </Text>
+            <Text style={globalStyles.secondHeader}>
+              How To Use:
+            </Text>
+            <Text style={globalStyles.secondText}>
+              1. Press Start Tour!{"\n"}
+              2. The app will guide you to the first tour stop{"\n"}
+              3. Upon arrival, you will see an information page pop up{"\n"}
+              4. You can swipe up to see more information (and other fun facts) about that stop{"\n"}
+              5. When you finish exploring that location, press either Next Stop to continue the tour
+              or End Tour to finish the tour{"\n"}
+              {"\n"}
+              * You can end the tour at any time by pressing End Tour on the bottom left{"\n"}
+              * To skip a particular stop, press Skip Stop and move on to the next stop.
+
+            </Text>
+          </View>
         </View>
       </Modal>
 
@@ -232,8 +255,7 @@ export default function Markers() {
         </View>
       </TouchableOpacity>
 
-
-      <Hideandshowcomponent endTour={endTour} />
+      <WelcomeScreen endTour={endTour} />
       <Tourfooter />
     </View>
   );
