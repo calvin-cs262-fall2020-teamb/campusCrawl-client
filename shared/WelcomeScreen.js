@@ -13,7 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 // export default function Hideandshowcomponent({changeShow}) {
 
 // export default function Hideandshowcomponent(showFooter) {
-export default function Hideandshowcomponent({endTour}) {
+export default function WelcomeScreen({ endTour }) {
   const [welcomeScreen, setWelcomeScreen] = useState(true);
 
   const pressHandler = () => {
@@ -49,7 +49,7 @@ export default function Hideandshowcomponent({endTour}) {
           <Text style={{ fontSize: 25, color: '#DC0000', }}>
             Welcome To Campus Crawl!
           </Text>
-          <View style={{borderBottomColor: '#A9A9A9', borderBottomWidth: 1, paddingBottom: 40,}}>  
+          <View style={{borderBottomColor: '#A9A9A9', borderBottomWidth: 1, paddingBottom: 40,}}>
             <Text style={{ fontSize: 15, paddingTop: 20, fontStyle: 'italic' }}>
               Calvin University's virtual campus tour app
             </Text>

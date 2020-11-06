@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+var width = Dimensions.get('window').width;
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -41,14 +42,56 @@ export const globalStyles = StyleSheet.create({
     shadowColor: '#808080',
     shadowOpacity: 1,
     shadowOffset: { width: 0, height: 0 },
-    backgroundColor: '#ffffff'
+    backgroundColor: '#f0f0f0'
   },
   closeLearn: {
     alignSelf: 'flex-end',
-    padding: 8,
+    paddingTop: 8,
+    paddingRight: 8,
+    zIndex: 20,
   },
-  learnContent: {
-    padding: 10,
+  learnHeader: {
+    paddingTop: 0,
+    paddingLeft: 15,
+    fontSize: 30,
+    zIndex: 15,
+  },
 
+  learnText: {
+    backgroundColor: '#ffffff',
+    height: '87%',
+    width: width - 32,
+    position: "absolute",
+    bottom: 0,
+    zIndex: 30,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  calvinImage: {
+    position: 'absolute',
+    alignSelf: 'center',
+    zIndex: 31,
+    width: width - 105,
+    height: 170,
+  },
+
+  infoText: {
+    top: 180,
+    paddingRight: 10,
+    left: 10,
+  },
+
+  secondHeader: {
+    fontSize: 20,
+    top: 200,
+    fontWeight: 'bold',
+    left: 10,
+    color: '#8B0000'
+  },
+
+  secondText: {
+    top: 210,
+    left: 10,
+    paddingRight: 10,
   },
 });
