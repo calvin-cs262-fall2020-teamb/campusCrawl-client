@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Modal } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
@@ -207,7 +207,7 @@ export default function Markers() {
       ) : null}
 
       <Modal visible={learnMore} animationType={'slide'} transparent={true} style={styles.learnModal}>
-        <View style={globalStyles.insideLearn}>
+        <View style={styles.insideLearn}>
           <MaterialIcons
             name='close'
             size={28}
@@ -215,30 +215,10 @@ export default function Markers() {
             onPress={() => setLearnMore(false)}
             style={styles.closeLearn}
           />
-          <Text style={globalStyles.learnContent}>Learning...</Text>
+          <Text style={styles.learnContent}>Learning...</Text>
         </View>
       </Modal>
-      <TouchableOpacity style={globalStyles.modalToggle}>
-        <View>
-          <MaterialIcons
-            name='info'
-            size={24}
-            onPress={() => setLearnMore(true)}
-          />
-        </View>
-      </TouchableOpacity><Modal visible={learnMore} animationType={'slide'} transparent={true} style={globalStyles.learnModal}>
-        <View style={globalStyles.insideLearn}>
-          <MaterialIcons
-            name='close'
-            size={28}
-            color='#808080'
-            onPress={() => setLearnMore(false)}
-            style={globalStyles.closeLearn}
-          />
-          <Text style={globalStyles.learnContent}>Learning...</Text>
-        </View>
-      </Modal>
-      <TouchableOpacity style={globalStyles.modalToggle}>
+      <TouchableOpacity style={styles.modalToggle}>
         <View>
           <MaterialIcons
             name='info'
@@ -247,6 +227,7 @@ export default function Markers() {
           />
         </View>
       </TouchableOpacity>
+
 
       <Hideandshowcomponent endTour={endTour} />
       <Tourfooter />
