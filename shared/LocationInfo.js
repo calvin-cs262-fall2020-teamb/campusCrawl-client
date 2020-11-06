@@ -11,7 +11,7 @@ export default function LocationInfo({locations, nextStop, endTour, id}) {
     return (
         <View style={styles.infoContainer}>
             <View style={styles.titlewrap}>
-                <Text style={styles.title}>{tourStop.name}</Text>
+                <Text style={styles.title}>{tourStop.greeting}</Text>
             </View>
             <Image style={styles.image} source={{uri: tourStop.image}}/>
             <Image style={styles.image2} source={require('../images/background3.jpeg')}/>
