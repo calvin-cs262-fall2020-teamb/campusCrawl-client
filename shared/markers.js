@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Modal, Image } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
+import { MaterialIcons } from '@expo/vector-icons';
 
-import Hideandshowcomponent from "./Hideandshowcomponent";
+import WelcomeScreen from "./WelcomeScreen";
 import Tourfooter from "./Tourfooter";
 import { globalStyles } from "../styles/global";
 
@@ -19,6 +20,7 @@ export default function Markers() {
   const [started, setStart] = useState(true);
   const [id, setID] = useState(0);
   const [inTransit, setTransitStatus] = useState(false);
+  const [learnMore, setLearnMore] = useState(false);
 
   const setRegion = (lat, long) => {
     setLatitude(lat), setLongitude(long);
@@ -40,6 +42,7 @@ export default function Markers() {
   };
 
   const [locations, setLocations] = useState([
+
     { id: 1, name: "Covenant Fine Arts Center", greeting: "Welcome to the \nCovenant Fine Arts Center", description: 'The CFAC serves as the host to many of Calvin’s events including the January Series and student activities. It’s also home to the English and Music departments, Center Art Gallery, Event Services, and the Calvin Box Office. The Covenant Fine Arts Center houses two large performance spaces and an art gallery.', 
     image: 'https://calvin.edu/contentAsset/image/4b2bc9e2-5ca1-475e-88c9-1c7a6db5fd1e/photo2/filter/Resize,Jpeg/resize_w/690/jpeg_q/80.jpeg'},
     { id: 2, name: "Hekman Library", greeting: "Welcome to the \nHekman Library", description: 'The Hekman Library supports the curricular needs and scholarship of the Calvin community. It maintains a relevant and expansive collection of easily accessible resources and offers knowledgeable research assistance and instruction in a hospitable environment.', 
@@ -190,7 +193,55 @@ export default function Markers() {
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
 
-      <Hideandshowcomponent endTour={endTour}/>
+      {/* modal with text formatted */}
+      <Modal visible={learnMore} animationType={'slide'} transparent={true} style={globalStyles.learnModal}>
+        <View style={globalStyles.insideLearn}>
+          <MaterialIcons
+            name='close'
+            size={28}
+            color='#808080'
+            onPress={() => setLearnMore(false)}
+            style={globalStyles.closeLearn}
+          />
+          <Text style={globalStyles.learnHeader}>
+            About Campus Crawl
+          </Text>
+          <View style={globalStyles.learnText}>
+            <Image style={globalStyles.calvinImage} source={require('../images/calvincampus.jpg')} />
+            <Text style={globalStyles.infoText}>
+              Campus Crawl is desinged to give you a meaningful experience of Calvin University's campus.
+              This self-guided tour takes you to all the important buildings and locations you will need for your college life.
+            </Text>
+            <Text style={globalStyles.secondHeader}>
+              How To Use:
+            </Text>
+            <Text style={globalStyles.secondText}>
+              1. Press Start Tour!{"\n"}
+              2. The app will guide you to the first tour stop{"\n"}
+              3. Upon arrival, you will see an information page pop up{"\n"}
+              4. You can swipe up to see more information (and other fun facts) about that stop{"\n"}
+              5. When you finish exploring that location, press Next Stop to continue the tour{"\n"}
+              {"\n"}
+              * You can end the tour at any time by pressing End Tour on the bottom left{"\n"}
+              * To skip a particular stop, press Skip Stop and move on to the next stop.
+
+            </Text>
+          </View>
+        </View>
+      </Modal>
+
+      {/* info button to toggle Modal */}
+      <TouchableOpacity style={globalStyles.modalToggle}>
+        <View>
+          <MaterialIcons
+            name='info'
+            size={24}
+            onPress={() => setLearnMore(true)}
+          />
+        </View>
+      </TouchableOpacity>
+
+      <WelcomeScreen endTour={endTour} />
       <Tourfooter />
     </View>
   );
