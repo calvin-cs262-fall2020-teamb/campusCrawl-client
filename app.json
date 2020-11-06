@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "scrawl",
-    "slug": "scrawl",
+    "name": "Campus Crawl",
+    "slug": "Campus-Crawl",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
