@@ -206,19 +206,21 @@ export default function Markers() {
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
 
-      <Modal visible={learnMore} animationType={'slide'} transparent={true} style={styles.learnModal}>
-        <View style={styles.insideLearn}>
+      <Modal visible={learnMore} animationType={'slide'} transparent={true} style={globalStyles.learnModal}>
+        <View style={globalStyles.insideLearn}>
           <MaterialIcons
             name='close'
             size={28}
             color='#808080'
             onPress={() => setLearnMore(false)}
-            style={styles.closeLearn}
+            style={globalStyles.closeLearn}
           />
-          <Text style={styles.learnContent}>Learning...</Text>
+          <Text style={globalStyles.learnContent}>
+            Learn More!
+          </Text>
         </View>
       </Modal>
-      <TouchableOpacity style={styles.modalToggle}>
+      <TouchableOpacity style={globalStyles.modalToggle}>
         <View>
           <MaterialIcons
             name='info'
