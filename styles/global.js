@@ -23,10 +23,11 @@ export const globalStyles = StyleSheet.create({
     zIndex: 15,
     position: "absolute",
     alignItems: 'flex-end',
-    top: 32,
+    // top: 32,
+    top: 38,
     bottom: 10,
     left: 0,
-    right: 15,
+    right: 18,
     height: 25,
   },
   learnModal: {
@@ -53,6 +54,7 @@ export const globalStyles = StyleSheet.create({
     zIndex: 20,
   },
   learnHeader: {
+    fontFamily: 'Lato-Regular',
     paddingTop: 0,
     paddingLeft: 15,
     fontSize: 30,
@@ -60,6 +62,7 @@ export const globalStyles = StyleSheet.create({
   },
 
   learnText: {
+    padding: 10,
     backgroundColor: '#ffffff',
     height: '87%',
     width: width - 32,
@@ -73,25 +76,29 @@ export const globalStyles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     zIndex: 31,
-    width: width - 105,
+    width: width - 100,
     height: 170,
   },
 
   infoText: {
+    fontFamily: 'Lato-Light',
     top: 180,
     paddingRight: 10,
     left: 10,
   },
 
   secondHeader: {
+    fontFamily: 'Lato-Black',
     fontSize: 20,
     top: 200,
     fontWeight: 'bold',
     left: 10,
-    color: '#8B0000'
+    // color: '#8B0000'
+    color: '#97252B'
   },
 
   secondText: {
+    fontFamily: 'Lato-Regular',
     top: 210,
     left: 10,
     paddingRight: 10,

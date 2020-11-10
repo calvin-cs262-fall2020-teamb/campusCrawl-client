@@ -10,22 +10,18 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-// export default function Hideandshowcomponent({changeShow}) {
-
-// export default function Hideandshowcomponent(showFooter) {
 export default function WelcomeScreen({ endTour }) {
   const [welcomeScreen, setWelcomeScreen] = useState(true);
 
   const pressHandler = () => {
     setWelcomeScreen(false);
     endTour();
-    // showFooter = true;
   };
 
   return (
     <Modal visible={welcomeScreen} animationType={"slide"} transparent={true}>
       <View style={styles.welcome}>
-        <Text style={{ fontSize: 25, color: "#DC0000" }}>
+        <Text style={{ fontSize: 25, color: "#97252B", fontFamily: 'Lato-Black' }}>
           Welcome To Campus Crawl!
         </Text>
         <View
@@ -35,13 +31,13 @@ export default function WelcomeScreen({ endTour }) {
             paddingBottom: 40,
           }}
         >
-          <Text style={{ fontSize: 15, paddingTop: 20, fontStyle: "italic" }}>
+          <Text style={{ fontSize: 16, paddingTop: 20, fontFamily: 'Lato-Light' }}>
             Calvin University's virtual campus tour app
           </Text>
         </View>
-        <View style={styles.button1}>
-          <Button title="Get Started!" color="#000" onPress={pressHandler} />
-        </View>
+        <TouchableOpacity style={styles.button1} onPress={pressHandler}>
+          <Text style={styles.buttonText}>LET'S GO!</Text> 
+        </TouchableOpacity>
       </View>
     </Modal>
 
@@ -74,30 +70,22 @@ const styles = StyleSheet.create({
     zIndex: 20,
     position: "absolute",
     alignSelf: "center",
-    bottom: 20,
-    width: 150,
-    height: 44,
+    bottom: 15,
+    padding: 12,
+    // width: 150,
+    // height: 44,
     justifyContent: "center",
-    backgroundColor: "#FFD700",
+    // backgroundColor: "#FFD700",
+    backgroundColor: "#97252B",
     borderRadius: 10,
     shadowColor: Platform.OS === "ios" ? "#808080" : null,
     shadowOpacity: Platform.OS === "ios" ? 0.5 : null,
     shadowOffset: Platform.OS === "ios" ? { width: 0, height: 2 } : null,
   },
-  button2: {
-    zIndex: 25,
-    position: "absolute",
-    right: 35,
-    bottom: 20,
-    width: 125,
-    height: 42,
-    justifyContent: "center",
-    backgroundColor: "#A9A9A9",
-    borderRadius: 10,
-    shadowColor: Platform.OS === "ios" ? "#808080" : null,
-    shadowOpacity: Platform.OS === "ios" ? 0.5 : null,
-    shadowOffset: Platform.OS === "ios" ? { width: 0, height: 2 } : null,
-    elevation: Platform.OS === "android" ? 5 : null,
+  buttonText: {
+    fontFamily: 'Lato-Black',
+    fontSize: 22,
+    color: '#E8CC16'
   },
   welcome: {
     zIndex: 15,
@@ -106,8 +94,8 @@ const styles = StyleSheet.create({
     paddingTop: 35,
     alignItems: "center",
     bottom: 375,
-    left: 30,
-    right: 30,
+    left: 25,
+    right: 25,
     height: 225,
     borderWidth: 1,
     borderColor: "#A9A9A9",
