@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 var width = Dimensions.get('window').width;
     
@@ -14,7 +15,7 @@ export default function LocationInfo({locations, nextStop, endTour, id}) {
                 <Text style={styles.title}>{tourStop.greeting}</Text>
             </View>
             <Image style={styles.image} source={{uri: tourStop.image}}/>
-            <Image style={styles.image2} source={require('../images/background3.jpeg')}/>
+            {/*<Image style={styles.image2} source={require('../images/background3.jpeg')}/>*/}
             <View style={styles.infowrap}>
                 <Text style={styles.info}>{tourStop.description}</Text>
             </View> 
@@ -23,12 +24,14 @@ export default function LocationInfo({locations, nextStop, endTour, id}) {
                  {/* show Next Stop button if not last stop  */}
             {locations.filter(item => item.id === id+1)[0] ? 
                 <TouchableOpacity style={[styles.button1, {right: 20}]} onPress={() => { nextStop(); }}>
-                    <Text style={{ fontSize: 23, color: 'black', }}>Next Stop</Text>
+                    <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>NEXT  </Text>
+                    <AntDesign name='rightcircleo' size={22} color='#3b3b3b'/>
                 </TouchableOpacity>
                 : null }
 
             <TouchableOpacity style={[styles.button2, {left: 20}]} onPress={() => { endTour(); }}>
-                <Text style={{ fontSize: 23, color: 'black', }}>End Tour</Text>
+                <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
+                <AntDesign name='closecircleo' size={22} color='#3b3b3b'/>
             </TouchableOpacity>
         </View>
     );
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         height: 410,
         width: width,
-        backgroundColor: '#800000',
+        backgroundColor: '#97252B',
         zIndex: 30,
         borderTopStartRadius: 10,
         borderTopEndRadius: 10,
@@ -49,8 +52,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
     },
     title: {
+        fontFamily: 'Lato-Regular',
         fontSize: 28,
-        color: '#000',
+        color: '#3b3b3b',
         zIndex: 35,
         textAlign: 'center',
     },
@@ -59,35 +63,63 @@ const styles = StyleSheet.create({
         zIndex: 32,
         top: 5,
         alignSelf: 'center',
-        width: 370,
+        width: 375,
         paddingVertical: 5,
         borderRadius: 10,
     },
     infowrap: {
+        position: 'absolute',
         paddingVertical: 3,
-        paddingHorizontal: 2,
+        paddingHorizontal: 8,
         backgroundColor: '#F2F2F2',
         zIndex: 35,
         width: 390,
         alignSelf: 'center',
-        top: 127,
+        top: 203,
         borderRadius: 8,
+        shadowColor: "#000",
+        shadowOpacity: 0.6,
+        shadowOffset: { width: 0, height: 0 },
+    },
+    info: {
+        fontFamily: 'Lato-Light',
+        fontSize: 15,
+        zIndex: 40,
+        textAlign: 'justify',
+        color: '#000'
     },
     button1: {
         position: 'absolute',
-        bottom: 26,
+        bottom: 24,
         zIndex: 32,
-        backgroundColor: '#FFD700',
-        padding: 7,
-        borderRadius: 10,
+        // backgroundColor: '#FFD700',
+        backgroundColor: '#E8CC16',
+        paddingVertical: 12,
+        // paddingHorizontal: 15,
+        width: 210,
+        borderRadius: 25,
+        shadowColor: "#000",
+        shadowOpacity: 0.6,
+        shadowOffset: { width: 0, height: 0 },
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     button2: {
         position: 'absolute',
-        bottom: 26,
+        bottom: 24,
         zIndex: 32,
         backgroundColor: '#C0C0C0',
-        padding: 7,
-        borderRadius: 10,
+        paddingVertical: 12,
+        // paddingHorizontal: 15,
+        width: 100,
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOpacity: 0.6,
+        shadowOffset: { width: 0, height: 0 },
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     image: {
         position: 'absolute',
@@ -106,9 +138,4 @@ const styles = StyleSheet.create({
         height: 210,
         top: 200,
     },
-    info: {
-        fontSize: 15,
-        zIndex: 40,
-        textAlign: 'center',
-    }
 });

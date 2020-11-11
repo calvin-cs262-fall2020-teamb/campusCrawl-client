@@ -44,12 +44,12 @@ export default function Markers() {
   const [locations, setLocations] = useState([
 
     { id: 1, name: "Covenant Fine Arts Center", greeting: "Welcome to the \nCovenant Fine Arts Center", description: 'The CFAC serves as the host to many of Calvin’s events including the January Series and student activities. It’s also home to the English and Music departments, Center Art Gallery, Event Services, and the Calvin Box Office. The Covenant Fine Arts Center houses two large performance spaces and an art gallery.', 
-    image: 'https://calvin.edu/contentAsset/image/4b2bc9e2-5ca1-475e-88c9-1c7a6db5fd1e/photo2/filter/Resize,Jpeg/resize_w/690/jpeg_q/80.jpeg'},
+    image: 'https://calvin.edu/contentAsset/image/e639c61e-0f83-4304-b2ec-84aa6fc83d46/bannerImage/filter/Resize,Jpeg/resize_w/720/jpeg_q/80.jpeg'},
     { id: 2, name: "Hekman Library", greeting: "Welcome to the \nHekman Library", description: 'The Hekman Library supports the curricular needs and scholarship of the Calvin community. It maintains a relevant and expansive collection of easily accessible resources and offers knowledgeable research assistance and instruction in a hospitable environment.', 
     image: 'https://calvin.edu/contentAsset/image/009d93b1-4381-4179-998d-53c85433c228/bannerImage/filter/Resize,Jpeg/resize_w/720/jpeg_q/80.jpeg'},
     {id: 3, name: "University Chapel", greeting: "Welcome to the \nChapel", description: 'Chapel is from 10–10:20 a.m. and is held in the chapel sanctuary. It features different styles of worship, themes, and speakers each day. We have a weekly rhythm which helps shape us as a community as we dedicate ourselves to begin, believe, belong, be still, and be loud together.',
     image: 'https://calvin.edu/contentAsset/image/4e424654-8d93-4ee6-bd69-3a90cf96eacd/bannerImage/filter/Resize,Jpeg/resize_w/720/jpeg_q/80.jpeg'},
-    {id: 4, name: "Devries Hall", greeting: "Welcome to \nDevries Hall", description: 'DeVries Hall is home to the chemistry and biochemistry and biology departments, as well as a herbarium which houses over 8,000 pressed plant specimens, thousands of insects, and hundreds of mammals, birds, and reptiles.', 
+    {id: 4, name: "DeVries Hall", greeting: "Welcome to \nDeVries Hall", description: 'DeVries Hall is home to the chemistry and biochemistry and biology departments, as well as a herbarium which houses over 8,000 pressed plant specimens, thousands of insects, and hundreds of mammals, birds, and reptiles.', 
     image: 'https://calvin.edu/contentAsset/image/031ceeea-2337-40e7-aa14-04f14ec33d14/bannerImage/filter/Resize,Jpeg/resize_w/720/jpeg_q/80.jpeg'},
     {id: 5, name: "Spoelhof Fieldhouse Complex", greeting: "Welcome to the \nSpoelhof Fieldhouse Complex", description: 'Home of the Calvin Knights, the entire complex accounts for roughly 10% of the total square footage around the campus: 362,000 square feet. The Spoelhof complex includes six classrooms, and is the hub to the Climbing Center, Hoogenboom Health & Recreation Center, Huizenga Tennis & Track Center, Morren Fitness Center, Van Noord Arena, and Venema Aquatic Center.',
     image: 'https://calvin.edu/contentAsset/image/fded4cb7-5350-4bfd-9706-55062850b2a3/bannerImage/filter/Resize,Jpeg/resize_w/720/jpeg_q/80.jpeg'},
@@ -209,7 +209,7 @@ export default function Markers() {
           <View style={globalStyles.learnText}>
             <Image style={globalStyles.calvinImage} source={require('../images/calvincampus.jpg')} />
             <Text style={globalStyles.infoText}>
-              Campus Crawl is desinged to give you a meaningful experience of Calvin University's campus.
+              Campus Crawl is designed to give you a meaningful experience of Calvin University's campus.
               This self-guided tour takes you to all the important buildings and locations you will need for your college life.
             </Text>
             <Text style={globalStyles.secondHeader}>
@@ -220,7 +220,7 @@ export default function Markers() {
               2. The app will guide you to the first tour stop{"\n"}
               3. Upon arrival, you will see an information page pop up{"\n"}
               4. You can swipe up to see more information (and other fun facts) about that stop{"\n"}
-              5. When you finish exploring that location, press Next Stop to continue the tour{"\n"}
+              5. When you finish exploring that location, press Next to continue the tour{"\n"}
               {"\n"}
               * You can end the tour at any time by pressing End Tour on the bottom left{"\n"}
               * To skip a particular stop, press Skip Stop and move on to the next stop.
@@ -235,7 +235,7 @@ export default function Markers() {
         <View>
           <MaterialIcons
             name='info'
-            size={24}
+            size={26}
             onPress={() => setLearnMore(true)}
           />
         </View>
