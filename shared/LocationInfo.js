@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 var width = Dimensions.get('window').width;
@@ -17,9 +17,10 @@ export default function LocationInfo({locations, nextStop, endTour, id}) {
             <Image style={styles.image} source={{uri: tourStop.image}}/>
             {/*<Image style={styles.image2} source={require('../images/background3.jpeg')}/>*/}
             <View style={styles.infowrap}>
-                <Text style={styles.info}>{tourStop.description}</Text>
+                <ScrollView>
+                    <Text style={styles.info}>{tourStop.description}</Text>
+                </ScrollView>
             </View> 
-
 
                  {/* show Next Stop button if not last stop  */}
             {locations.filter(item => item.id === id+1)[0] ? 
@@ -29,6 +30,7 @@ export default function LocationInfo({locations, nextStop, endTour, id}) {
                 </TouchableOpacity>
                 : null }
 
+                 {/* end tour button  */}
             <TouchableOpacity style={[styles.button2, {left: 20}]} onPress={() => { endTour(); }}>
                 <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
                 <AntDesign name='closecircleo' size={22} color='#3b3b3b'/>
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
         width: 390,
         alignSelf: 'center',
         top: 203,
+        bottom: 90,
         borderRadius: 8,
         shadowColor: "#000",
         shadowOpacity: 0.6,
