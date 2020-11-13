@@ -22,6 +22,10 @@ export default function Markers() {
   const [inTransit, setTransitStatus] = useState(false);
   const [learnMore, setLearnMore] = useState(false);
 
+  
+  const [isLoading, setLoading] = useState(true);
+  const [locations, setData] = useState([]);
+
   const setRegion = (lat, long) => {
     setLatitude(lat), setLongitude(long);
   };
@@ -33,16 +37,18 @@ export default function Markers() {
   const nextStop = () => {
     setTransitStatus(true);
     setInfoShow(false);
+    setRegion(locations.filter(item => item.id === id+1)[0].latitude, locations.filter(item => item.id === id+1)[0].longitude)
   };
+  const skipStop =  () => {
+    setID(id+1);
+    setRegion(locations.filter(item => item.id === id+2)[0].latitude, locations.filter(item => item.id === id+2)[0].longitude)
+  }
   const endTour = () => {
     setStart(false);
     setInfoShow(false);
     setTransitStatus(false);
     setID(0);
   };
-
-  const [isLoading, setLoading] = useState(true);
-  const [locations, setData] = useState([]);
 
   {/* Load data from webservice */}
     useEffect(() => {
@@ -74,6 +80,26 @@ export default function Markers() {
     text = JSON.stringify(location);
   }
 
+
+  let markers = locations.map(marker => (
+    <Marker
+      key={marker.id}
+      coordinate={{
+        latitude: marker.latitude,
+        longitude: marker.longitude,
+      }}
+      title={marker.name}
+      onPress={() => {
+        setTransitStatus(false),
+          setID(marker.id),
+          setInfoShow(true),
+          setLatitude(marker.latitude),
+          setLongitude(marker.longitude);
+      }}
+      >
+      </Marker>
+  ));
+
   return (
     <View>
       <MapView
@@ -90,90 +116,13 @@ export default function Markers() {
         <UrlTile
           urlTemplate={"http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"}
         />
-
-        <Marker
-          coordinate={{ latitude: 42.930548, longitude: -85.58581 }}
-          title="Stop 1"
-          onPress={() => {
-            setTransitStatus(false),
-              setID(1),
-              setInfoShow(true),
-              setLatitude(42.930548),
-              setLongitude(-85.58581);
-          }}
-        ></Marker>
-
-        <Marker
-          coordinate={{ latitude: 42.92965, longitude: -85.58762 }}
-          title="Stop 2"
-          onPress={() => {
-            setID(2),
-              setInfoShow(true),
-              setLatitude(42.92965),
-              setLongitude(-85.58762);
-          }}
-        ></Marker>
-        <Marker
-          coordinate={{ latitude: 42.9293, longitude: -85.58845 }}
-          title="Stop 3"
-          onPress={() => {
-            setID(3),
-              setInfoShow(true),
-              setLatitude(42.9293),
-              setLongitude(-85.58845);
-          }}
-        ></Marker>
-        <Marker
-          coordinate={{ latitude: 42.93095, longitude: -85.58926 }}
-          title="Stop 4"
-          onPress={() => {
-            setID(4),
-              setInfoShow(true),
-              setLatitude(42.93095),
-              setLongitude(-85.58926);
-          }}
-        ></Marker>
-        <Marker
-          coordinate={{ latitude: 42.93301, longitude: -85.58917 }}
-          title="Stop 5"
-          onPress={() => {
-            setID(5),
-              setInfoShow(true),
-              setLatitude(42.93301),
-              setLongitude(-85.58917);
-          }}
-        ></Marker>
-        <Marker
-          coordinate={{ latitude: 42.9333, longitude: -85.58635 }}
-          title="Stop 6"
-          onPress={() => {
-            setID(6),
-              setInfoShow(true),
-              setLatitude(42.9333),
-              setLongitude(-85.58635);
-          }}
-        ></Marker>
-        <Marker
-          coordinate={{ latitude: 42.93125, longitude: -85.58701 }}
-          title="Stop 7"
-          onPress={() => {
-            setID(7),
-              setInfoShow(true),
-              setLatitude(42.93125),
-              setLongitude(-85.58701);
-          }}
-        ></Marker>
-        <Marker
-          coordinate={{ latitude: latitude, longitude: longitude }}
-          pinColor={"blue"}
-          title="You are here"
-        ></Marker>
+        {markers}
       </MapView>
 
       {console.log(inTransit)}
 
       {started ? null : <Start startTour={startTour} />}
-      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} id={id} setID={setID} /> : null}
+      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} id={id} skipStop={skipStop} /> : null}
       {showInfo ? (
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
