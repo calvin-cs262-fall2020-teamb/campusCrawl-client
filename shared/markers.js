@@ -9,6 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import WelcomeScreen from "./WelcomeScreen";
 import Tourfooter from "./Tourfooter";
+import AboutScreen from "./AboutScreen";
 import { globalStyles } from "../styles/global";
 
 export default function Markers() {
@@ -127,43 +128,7 @@ export default function Markers() {
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
 
-      {/* modal with text formatted */}
-      <Modal visible={learnMore} animationType={'slide'} transparent={true} style={globalStyles.learnModal}>
-        <View style={globalStyles.insideLearn}>
-          <MaterialIcons
-            name='close'
-            size={28}
-            color='#808080'
-            onPress={() => setLearnMore(false)}
-            style={globalStyles.closeLearn}
-          />
-          <Text style={globalStyles.learnHeader}>
-            About Campus Crawl
-          </Text>
-          <View style={globalStyles.learnText}>
-            <Image style={globalStyles.calvinImage} source={require('../images/calvincampus.jpg')} />
-            <Text style={globalStyles.infoText}>
-              Campus Crawl is designed to give you a meaningful experience of Calvin University's campus.
-              This self-guided tour takes you to all the important buildings and locations you will need for your college life.
-            </Text>
-            <Text style={globalStyles.secondHeader}>
-              How To Use:
-            </Text>
-            <Text style={globalStyles.secondText}>
-              1. Press Start Tour!{"\n"}
-              2. The app will guide you to the first tour stop{"\n"}
-              3. Upon arrival, you will see an information page pop up{"\n"}
-              4. You can swipe up to see more information (and other fun facts) about that stop{"\n"}
-              5. When you finish exploring that location, press Next to continue the tour{"\n"}
-              {"\n"}
-              * You can end the tour at any time by pressing End Tour on the bottom left{"\n"}
-              * To skip a particular stop, press Skip Stop and move on to the next stop.
-
-            </Text>
-          </View>
-        </View>
-      </Modal>
-
+      <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
       {/* info button to toggle Modal */}
       <TouchableOpacity style={globalStyles.modalToggle}>
         <View>
