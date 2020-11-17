@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image, ScrollView, SafeAreaView } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 
@@ -38,6 +38,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
                     </TouchableOpacity>
                     : null}
 
+                    {/* end tour button  */}
                 <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={() => { endTour(); }}>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
                     <AntDesign name='closecircleo' size={22} color='#3b3b3b' />

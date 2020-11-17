@@ -2,7 +2,7 @@ import React, { useState, } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 var width = Dimensions.get('window').width;
 
-export default function DestinationGuide({ locations, id, endTour, setID }){
+export default function DestinationGuide({ locations, id, endTour, skipStop }){
 
     const tourStop  = locations.filter(item => item.id === id+1)[0]
     console.log(id)
@@ -20,7 +20,7 @@ export default function DestinationGuide({ locations, id, endTour, setID }){
 
             {/*Only show skip stop if it's not the last stop (because endTour does what we want and otherwise skip stop will show a nameless destinationGuide screen) */}
             {locations.filter(item => item.id === id+2)[0] ? 
-            <TouchableOpacity style={[styles.button, {right: 20}]} onPress={() => { setID(id+1); }}>
+            <TouchableOpacity style={[styles.button, {right: 20}]} onPress={() => { skipStop(); }}>
                     <Text style={{ fontSize: 23, color: 'black', }}>Skip Stop</Text>
             </TouchableOpacity> : null}
         </View>
