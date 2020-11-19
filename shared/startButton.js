@@ -1,13 +1,25 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
-var width = Dimensions.get('window').width;
+import PropTypes from 'prop-types';
 
-export default function Start({ startTour }){
-    return( 
-        <View style={styles.bar}>            
-                <TouchableOpacity style={styles.start} onPress={() => { startTour(); }}>
-                    <Text style={styles.startText}>START  TOUR</Text>
-                </TouchableOpacity>
+// define the width of the screen as a variable
+// not sure why, but does not work when destructured
+const width = Dimensions.get('window').width;
+
+// create footer with button to start a tour
+export default function Start({ startTour }) {
+
+    // validate properties of startTour
+    Start.propTypes = { startTour: PropTypes.func };
+
+    return (
+        <View style={styles.bar}>
+            <TouchableOpacity style={styles.start} onPress={() => { 
+                startTour(); 
+                }}
+            >
+                <Text style={styles.startText}>START  TOUR</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -19,7 +31,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         flex: 1,
         height: 110,
-        width: width,
+        width,
         backgroundColor: "#97252B",
         shadowColor: "#808080",
         shadowOpacity: 1,
@@ -28,7 +40,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 50
     },
     start: {
-        zIndex: 20,
         zIndex: 25,
         position: 'absolute',
         bottom: 40,
@@ -47,9 +58,9 @@ const styles = StyleSheet.create({
     },
     startText: {
         fontFamily: 'Lato-Regular',
-        fontSize: 18, 
+        fontSize: 18,
         color: '#3b3b3b',
-        alignSelf: 'center', 
+        alignSelf: 'center',
     }
 });
 
