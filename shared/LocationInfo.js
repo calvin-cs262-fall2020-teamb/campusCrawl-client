@@ -1,28 +1,36 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 
+// define the width of the screen as a variable
+// not sure why, but does not work when destructured
+const width = Dimensions.get('window').width;
 
-var width = Dimensions.get('window').width;
-
-
+// create a screen that shows the information of a location
 export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
-    const tourStop = locations.filter(item => item.id === id)[0]
+    // array destructuring to give tourStop the first item in the array
+    const [tourStop] = locations.filter((item) => item.id === id);
+
+    // validate properties of locations, nextStop, endTour, and id
+    LocationInfo.propTypes = { locations: PropTypes.array };
+    LocationInfo.propTypes = { nextStop: PropTypes.func };
+    LocationInfo.propTypes = { endTour: PropTypes.func };
+    LocationInfo.propTypes = { id: PropTypes.number };
 
     return (
-        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: width,  }}>
-            <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces='false'>
-                {/*Empty element in ScrollView to start infoContainer lower*/}
+        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width }}>
+            <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces="false">
+                { /* empty element in ScrollView to start infoContainer lower */}
                 <View style={styles.clear}>
                 </View>
-                {/*Second element in ScrollView, location info*/}
+                { /* second element in ScrollView, location info */}
                 <View style={styles.infoContainer}>
                     <View style={styles.titlewrap}>
                         <Text style={styles.title}>{tourStop.greeting}</Text>
                     </View>
                     <Image style={styles.image} source={{ uri: tourStop.image }} />
-                    {/*<Image style={styles.image2} source={require('../images/background3.jpeg')}/>*/}
                     <View style={styles.infowrap}>
                         <Text style={styles.info}>{tourStop.description}</Text>
                     </View>
@@ -30,18 +38,24 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
             </ScrollView>
 
             <View style={styles.buttonwrap}>
-                {/*show Next Stop button if not last stop */}
-                {locations.filter(item => item.id === id + 1)[0] ?
-                    <TouchableOpacity style={[styles.button1, { right: 20 }]} onPress={() => { nextStop(); }}>
+                { /* show Next Stop button if not last stop */}
+                {locations.filter((item) => item.id === id + 1)[0]
+                    ? <TouchableOpacity style={[styles.button1, { right: 20 }]} onPress={() => { 
+                        nextStop(); 
+                        }}
+                      >
                         <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>NEXT  </Text>
-                        <AntDesign name='rightcircleo' size={22} color='#3b3b3b' />
+                        <AntDesign name="rightcircleo" size={22} color="#3b3b3b" />
                     </TouchableOpacity>
                     : null}
 
-                    {/* end tour button  */}
-                <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={() => { endTour(); }}>
+                {/* end tour button  */}
+                <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={() => { 
+                    endTour(); 
+                    }}
+                >
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
-                    <AntDesign name='closecircleo' size={22} color='#3b3b3b' />
+                    <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
             </View>
         </View>
@@ -103,7 +117,7 @@ const styles = StyleSheet.create({
     buttonwrap: {
         backgroundColor: '#3b3b3b',
         height: 90,
-        width: width,
+        width,
         bottom: 0,
         zIndex: 32,
         shadowColor: "#000",
@@ -147,7 +161,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         zIndex: 31,
-        width: width,
+        width,
         height: 200,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -156,7 +170,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         zIndex: 31,
-        width: width,
+        width,
         height: 210,
         top: 200,
     },
