@@ -1,14 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, Alert } from "react-native";
 import PropTypes from 'prop-types';
-import { EvilIcons } from '@expo/vector-icons';
 import { globalStyles } from "../styles/global";
 
 // define the width of the screen as a variable
 const { width } = Dimensions.get('window').width;
 
 // create a screen that guides the user between stops
-export default function DestinationGuide({ locations, id, endTour, skipStop }) {
+export default function DestinationGuide({ locations, id, endTour, skipStop, arriveAtLocation }) {
 
     // array destructuring to give tourStop the first item in the array
     const [tourStop] = locations.filter((item) => item.id === id + 1);
@@ -67,7 +66,7 @@ export default function DestinationGuide({ locations, id, endTour, skipStop }) {
                     </TouchableOpacity> : null}
 
                 <TouchableOpacity style={[styles.button, {marginLeft: 20, width: 125} ]} onPress={() => { 
-                    
+                    arriveAtLocation();
                     }}
                 >
                     <Text style={{fontSize: 15, color: '#3b3b3b', fontFamily: 'Lato-Regular', textAlign: 'center'}}>Override: I'm there</Text>

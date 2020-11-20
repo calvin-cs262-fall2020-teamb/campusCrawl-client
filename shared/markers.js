@@ -51,6 +51,14 @@ export default function Markers() {
     setID(0);
   };
 
+  const arriveAtLocation = () => {
+    setTransitStatus(false),
+          setID(id+1),
+          setInfoShow(true),
+          setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
+
+  }
+
   // Load data from webservice
   useEffect(() => {
     fetch('https://campus-crawl-service.herokuapp.com/locations')
@@ -127,7 +135,7 @@ export default function Markers() {
 
       { /* display components for tour */ }
       {started ? null : <Start startTour={startTour} />}
-      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} id={id} />: null}
+      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} />: null}
       {inTransit ? <DestinationName locations={locations} id={id} />: null}
 
 
