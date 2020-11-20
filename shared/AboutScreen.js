@@ -27,7 +27,7 @@ export default function AboutScreen({ learnMore, setLearnMore }) {
                         About Campus Crawl
                     </Text>
                     <View style={globalStyles.learnText}>
-                        <Image style={globalStyles.calvinImage} source={{ uri: '../images/calvincampus.jpg' }} />
+                        <Image style={globalStyles.calvinImage} source={require('../images/calvincampus.jpg' )} />
                         <Text style={globalStyles.infoText}>
                             Campus Crawl is designed to give you a meaningful experience of Calvin University&apos;s campus.
                             This self-guided tour takes you to all the important buildings and locations you will need for your college life.
