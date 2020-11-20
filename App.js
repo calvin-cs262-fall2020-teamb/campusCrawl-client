@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { globalStyles } from "./styles/global";
 import * as font from 'expo-font';
@@ -18,20 +18,22 @@ const getFonts = () => font.loadAsync({
   'Lato-Regular': require('./assets/fonts/Lato-Regular.ttf'),
 });
 
+// create the overall app
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  if(fontsLoaded){
-  return (
-    <View style={globalStyles.container}>
-      <Markers />
-    </View>
-  );
+  // only start the app if the fonts are loaded
+  if (fontsLoaded) {
+    return (
+      <View style={globalStyles.container}>
+        <Markers />
+      </View>
+    );
   } else {
     return (
-      <AppLoading 
-      startAsync={getFonts}
-      onFinish={() => setFontsLoaded(true)}
+      <AppLoading
+        startAsync={getFonts}
+        onFinish={() => setFontsLoaded(true)}
       />
     )
   }
