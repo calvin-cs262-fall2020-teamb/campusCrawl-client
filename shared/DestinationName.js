@@ -42,7 +42,7 @@ export default function DestinationName({ locations, id }) {
             alignItems: 'center', 
             justifyContent: 'center', 
             width: 350,
-            borderRadius: 15
+            borderRadius: 15,
         },
         text: {
             fontSize: 25, 

@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         height: 440,
     },
     infoContainer: {
-        height: 720,
+        height: 1140,
         backgroundColor: '#97252B',
         zIndex: 30,
         borderTopStartRadius: 10,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         paddingHorizontal: 8,
         paddingVertical: 5,
-        height: 500,
+        height: 900,
         backgroundColor: '#F2F2F2',
         zIndex: 35,
         width: 390,
