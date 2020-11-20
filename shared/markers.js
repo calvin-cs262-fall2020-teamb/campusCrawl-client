@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
@@ -9,6 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
+import SkipButton from "./skipButton";
 import { globalStyles } from "../styles/global";
 
 // define markers component to place on the map
@@ -103,7 +104,7 @@ export default function Markers() {
   ));
 
   return (
-    <View>
+    <View style={{zIndex: -1}}>
       <MapView
         style={globalStyles.mapStyle}
         showsUserLocation={true}
@@ -126,7 +127,9 @@ export default function Markers() {
 
       { /* display components for tour */ }
       {started ? null : <Start startTour={startTour} />}
-      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} id={id} skipStop={skipStop} /> : null}
+      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} id={id} />: null}
+      {inTransit ? <SkipButton locations={locations} id={id} skipStop={skipStop} />: null}
+
       {showInfo ? (
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
@@ -144,6 +147,7 @@ export default function Markers() {
       </TouchableOpacity>
 
       <WelcomeScreen endTour={endTour} />
+
     </View>
   );
 }

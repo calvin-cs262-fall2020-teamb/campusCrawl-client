@@ -103,4 +103,20 @@ export const globalStyles = StyleSheet.create({
     left: 10,
     paddingRight: 10,
   },
+  skipButton: {
+    position: 'absolute',
+    right: 10,
+    bottom: 130,
+    backgroundColor: '#C0C0C0',
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.6,
+    shadowOffset: { width: 0, height: 0 },
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 35
+},
 });

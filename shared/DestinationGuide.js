@@ -1,15 +1,27 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
 import PropTypes from 'prop-types';
+import { EvilIcons } from '@expo/vector-icons';
+import { globalStyles } from "../styles/global";
 
 // define the width of the screen as a variable
 const { width } = Dimensions.get('window').width;
 
 // create a screen that guides the user between stops
-export default function DestinationGuide({ locations, id, endTour, skipStop }) {
+export default function DestinationGuide({ locations, id, endTour }) {
 
     // array destructuring to give tourStop the first item in the array
     const [tourStop] = locations.filter((item) => item.id === id + 1);
+    const progress = '../images/' + id + '.jpg';
+    const images = [
+        require('../images/1.jpg'),
+        require('../images/2.jpg'),
+        require('../images/3.jpg'),
+        require('../images/4.jpg'),
+        require('../images/5.jpg'),
+        require('../images/6.jpg'),
+        require('../images/7.jpg'),
+    ]
 
     // validate properties of locations, id, endTour, and skipStop
     DestinationGuide.propTypes = { locations: PropTypes.array };
@@ -17,59 +29,78 @@ export default function DestinationGuide({ locations, id, endTour, skipStop }) {
     DestinationGuide.propTypes = { endTour: PropTypes.func };
     DestinationGuide.propTypes = { skipStop: PropTypes.func };
 
-    return (
-        <View style={styles.bar}>
-            { /* not sure why this conditional is needed because it seems like it would always be true. but it shows an error when you press the last stop otherwise. */}
-            {tourStop
-                ? <Text style={{ fontSize: 23, color: 'black', }}>Go to {tourStop.name}</Text> : null}
-            <Text style={{ fontSize: 15, color: 'blue' }}> stop {id + 1} of 7</Text>
-            <Text style={{ fontSize: 14 }}>In the future, the destination name and a route to follow will be shown. For now, just scroll to the marker and tap it.</Text>
-            <TouchableOpacity style={[styles.button, { left: 20 }]} onPress={() => { 
-                endTour(); 
-                }}
-            >
-                <Text style={{ fontSize: 23, color: 'black', }}>End Tour</Text>
-            </TouchableOpacity>
 
-            { /* only show skip stop if it's not the last stop (because endTour does what we want and otherwise skip stop will show a nameless destinationGuide screen) */}
-            {locations.filter((item) => item.id === id + 2)[0]
-                ? <TouchableOpacity style={[styles.button, { right: 20 }]} onPress={() => { 
-                    skipStop(); 
+    return (
+       
+        <View style={styles.bar}>
+          
+
+            <View style={{flexDirection:"row", marginTop: 5, marginLeft: 5, height: 50}}>
+                <TouchableOpacity style={ styles.quitButton } onPress={() => { 
+                    endTour(); 
                     }}
-                  >
-                    <Text style={{ fontSize: 23, color: 'black', }}>Skip Stop</Text>
-                </TouchableOpacity> : null}
+                >
+                    <Text style={{fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular'}}>Quit</Text>
+                </TouchableOpacity>
+                
+                <View style={{ flexDirection:"row", width: '100%', alignItems: 'center', marginLeft: 5}}>
+                 <EvilIcons
+                            name="location"
+                            size={28}
+                            color="#97252B"
+                        />
+                    {/* not sure why this conditional is needed because it seems like it would always be true. but it shows an error when you press the last stop otherwise. */}
+                    {tourStop
+                        ? <Text style={styles.text}>{tourStop.name}</Text> : null}
+                </View>
+                
+            </View>
+            
+            <Image style={styles.progressBar} source={images[id]}/>
+
+            
         </View>
+        
 
     );
 }
 
 const styles = StyleSheet.create({
+
+    progressBar: {
+        resizeMode: 'contain', 
+        width: '100%', 
+        height: '100%',
+        bottom: 30
+    },
+    text: {
+        fontSize: 18, 
+        color: '#97252B',
+        
+    },
     bar: {
         zIndex: 15,
         position: 'absolute',
-
         bottom: 0,
         flex: 1,
-        height: 175,
-        width,
+        height: 125,
+        width: '100%',
         backgroundColor: "white",
     },
-    start: {
-        zIndex: 25,
-        position: 'absolute',
-        bottom: 22,
-        width: 125,
-        height: 42,
-        alignSelf: 'center',
+    
+    quitButton: {
+        
+        backgroundColor: '#C0C0C0',
+        paddingVertical: 12,
+        // paddingHorizontal: 15,
+        width: 80,
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOpacity: 0.6,
+        shadowOffset: { width: 0, height: 0 },
         justifyContent: 'center',
-        backgroundColor: '#A9A9A9',
-        borderRadius: 10,
-
-    },
-    button: {
-        position: 'absolute',
-        bottom: 30,
+        alignItems: 'center',
+        zIndex: 20
     }
 
 });
