@@ -9,7 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
-import SkipButton from "./skipButton";
+import DestinationName from "./DestinationName";
 import { globalStyles } from "../styles/global";
 
 // define markers component to place on the map
@@ -127,8 +127,9 @@ export default function Markers() {
 
       { /* display components for tour */ }
       {started ? null : <Start startTour={startTour} />}
-      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} id={id} />: null}
-      {inTransit ? <SkipButton locations={locations} id={id} skipStop={skipStop} />: null}
+      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} id={id} />: null}
+      {inTransit ? <DestinationName locations={locations} id={id} />: null}
+
 
       {showInfo ? (
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />

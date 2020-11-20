@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, Alert } from "react-native";
 import PropTypes from 'prop-types';
 import { EvilIcons } from '@expo/vector-icons';
 import { globalStyles } from "../styles/global";
@@ -8,11 +8,12 @@ import { globalStyles } from "../styles/global";
 const { width } = Dimensions.get('window').width;
 
 // create a screen that guides the user between stops
-export default function DestinationGuide({ locations, id, endTour }) {
+export default function DestinationGuide({ locations, id, endTour, skipStop }) {
 
     // array destructuring to give tourStop the first item in the array
     const [tourStop] = locations.filter((item) => item.id === id + 1);
-    const progress = '../images/' + id + '.jpg';
+
+    // progress meters for each stop
     const images = [
         require('../images/1.jpg'),
         require('../images/2.jpg'),
@@ -22,6 +23,22 @@ export default function DestinationGuide({ locations, id, endTour }) {
         require('../images/6.jpg'),
         require('../images/7.jpg'),
     ]
+
+    const nextID = id+1;
+    const skipConfirmation = () =>
+    Alert.alert(
+      "Skip Stop",
+      "Are you sure you want to skip stop " + nextID + "?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => skipStop() }
+      ],
+      { cancelable: false }
+    );
 
     // validate properties of locations, id, endTour, and skipStop
     DestinationGuide.propTypes = { locations: PropTypes.array };
@@ -36,23 +53,25 @@ export default function DestinationGuide({ locations, id, endTour }) {
           
 
             <View style={{flexDirection:"row", marginTop: 5, marginLeft: 5, height: 50}}>
-                <TouchableOpacity style={ styles.quitButton } onPress={() => { 
+                <TouchableOpacity style={ styles.button } onPress={() => { 
                     endTour(); 
                     }}
                 >
                     <Text style={{fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular'}}>Quit</Text>
                 </TouchableOpacity>
                 
-                <View style={{ flexDirection:"row", width: '100%', alignItems: 'center', marginLeft: 5}}>
-                 <EvilIcons
-                            name="location"
-                            size={28}
-                            color="#97252B"
-                        />
-                    {/* not sure why this conditional is needed because it seems like it would always be true. but it shows an error when you press the last stop otherwise. */}
-                    {tourStop
-                        ? <Text style={styles.text}>{tourStop.name}</Text> : null}
-                </View>
+                {locations.filter((item) => item.id === id + 2)[0]
+                    ? <TouchableOpacity style={[styles.button, {marginLeft: 20, width:125}]} onPress={ skipConfirmation } 
+                    >
+                        <Text style={{fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular'}}>Skip Stop</Text>
+                    </TouchableOpacity> : null}
+
+                <TouchableOpacity style={[styles.button, {marginLeft: 20, width: 125} ]} onPress={() => { 
+                    
+                    }}
+                >
+                    <Text style={{fontSize: 15, color: '#3b3b3b', fontFamily: 'Lato-Regular', textAlign: 'center'}}>Override: I'm there</Text>
+                </TouchableOpacity>
                 
             </View>
             
@@ -73,11 +92,6 @@ const styles = StyleSheet.create({
         height: '100%',
         bottom: 30
     },
-    text: {
-        fontSize: 18, 
-        color: '#97252B',
-        
-    },
     bar: {
         zIndex: 15,
         position: 'absolute',
@@ -85,10 +99,10 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 125,
         width: '100%',
-        backgroundColor: "white",
+        backgroundColor: "transparent",
     },
     
-    quitButton: {
+    button: {
         
         backgroundColor: '#C0C0C0',
         paddingVertical: 12,
