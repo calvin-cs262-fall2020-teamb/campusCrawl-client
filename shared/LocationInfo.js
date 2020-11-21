@@ -1,11 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-
-// define the width of the screen as a variable
-// not sure why, but does not work when destructured
-const width = Dimensions.get('window').width;
 
 // create a screen that shows the information of a location
 export default function LocationInfo({ locations, nextStop, endTour, id }) {
@@ -19,8 +15,23 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
     LocationInfo.propTypes = { endTour: PropTypes.func };
     LocationInfo.propTypes = { id: PropTypes.number };
 
+    const quitConfirmation = () =>
+    Alert.alert(
+      "Quit tour",
+      "Are you sure you want to quit?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => endTour() }
+      ],
+      { cancelable: false }
+    );
+
     return (
-        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width }}>
+        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%' }}>
             <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces="false">
                 { /* empty element in ScrollView to start infoContainer lower */}
                 <View style={styles.clear}>
@@ -50,10 +61,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
                     : null}
 
                 {/* end tour button  */}
-                <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={() => { 
-                    endTour(); 
-                    }}
-                >
+                <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={ quitConfirmation }>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
                     <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
@@ -117,7 +125,7 @@ const styles = StyleSheet.create({
     buttonwrap: {
         backgroundColor: '#3b3b3b',
         height: 90,
-        width,
+        width: '100%',
         bottom: 0,
         zIndex: 32,
         shadowColor: "#000",
@@ -161,7 +169,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         zIndex: 31,
-        width,
+        width: '100%',
         height: 200,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -170,7 +178,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         zIndex: 31,
-        width,
+        width: '100%',
         height: 210,
         top: 200,
     },
