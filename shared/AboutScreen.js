@@ -42,7 +42,7 @@ export default function AboutScreen({ learnMore, setLearnMore }) {
                             4. You can swipe up to see more information (and other fun facts) about that stop{"\n"}
                             5. When you finish exploring that location, press Next to continue the tour{"\n"}
                                         {"\n"}
-                            * You can end the tour at any time by pressing End Tour on the bottom left{"\n"}
+                            * You can end the tour at any time by pressing Quit on the bottom left{"\n"}
                             * To skip a particular stop, press Skip Stop and move on to the next stop.
                         </Text>
                     </View>

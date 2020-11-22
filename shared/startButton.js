@@ -2,10 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import PropTypes from 'prop-types';
 
-// define the width of the screen as a variable
-// not sure why, but does not work when destructured
-const width = Dimensions.get('window').width;
-
 // create footer with button to start a tour
 export default function Start({ startTour }) {
 
@@ -31,7 +27,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         flex: 1,
         height: 110,
-        width,
+        width: '100%',
         backgroundColor: "#97252B",
         shadowColor: "#808080",
         shadowOpacity: 1,

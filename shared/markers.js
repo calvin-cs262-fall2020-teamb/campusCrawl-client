@@ -105,52 +105,52 @@ export default function Markers() {
     </Marker>
   ));
 
-  return (
-    <View style={{zIndex: -1}}>
-      <MapView
-        style={globalStyles.mapStyle}
-        showsUserLocation={true}
-        followsUserLocation={true}
-        region={{
-          latitude: latitude,
-          longitude: longitude,
-          latitudeDelta: 0.0032,
-          longitudeDelta: 0.0031,
-        }}
-      >
-        { /* google maps street overlay */ }
-        <UrlTile
-          urlTemplate={"http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-        />
-        {markers}
-      </MapView>
-
-      {console.log(inTransit)}
-
-      { /* display components for tour */ }
-      {started ? null : <Start startTour={startTour} />}
-      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} />: null}
-      {inTransit ? <DestinationName locations={locations} id={id} />: null}
-
-
-      {showInfo ? (
-        <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
-      ) : null}
-
-      <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
-      { /* info button to toggle Modal */ }
-      <TouchableOpacity style={globalStyles.modalToggle}>
-        <View>
-          <MaterialIcons
-            name='info'
-            size={26}
-            onPress={() => setLearnMore(true)}
+    return (
+      <View style={{ zIndex: -1 }}>
+        <MapView
+          style={globalStyles.mapStyle}
+          showsUserLocation={true}
+          followsUserLocation={false}
+          region={{
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.0032,
+            longitudeDelta: 0.0031,
+          }}
+        >
+          { /* google maps street overlay */}
+          <UrlTile
+            urlTemplate={"http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"}
           />
-        </View>
-      </TouchableOpacity>
+          {markers}
+        </MapView>
 
-      <WelcomeScreen endTour={endTour} />
+        {console.log(inTransit)}
 
-    </View>
-  );
-}
+        { /* display components for tour */}
+        {started ? null : <Start startTour={startTour} />}
+        {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
+        {inTransit ? <DestinationName locations={locations} id={id} /> : null}
+
+
+        {showInfo ? (
+          <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
+        ) : null}
+
+        <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
+        { /* info button to toggle Modal */}
+        <TouchableOpacity style={globalStyles.modalToggle}>
+          <View>
+            <MaterialIcons
+              name='info'
+              size={28}
+              onPress={() => setLearnMore(true)}
+            />
+          </View>
+        </TouchableOpacity>
+
+        <WelcomeScreen endTour={endTour} />
+
+      </View>
+    );
+};
