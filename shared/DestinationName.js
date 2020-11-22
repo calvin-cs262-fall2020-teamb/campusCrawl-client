@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import PropTypes from 'prop-types';
 import { EvilIcons } from '@expo/vector-icons';
 
@@ -7,7 +7,11 @@ export default function DestinationName({ locations, id }) {
 
     const [tourStop] = locations.filter((item) => item.id === id + 1);
 
-    return(
+    // validate properties of locations, nextStop, endTour, and id
+    DestinationName.propTypes = { locations: PropTypes.array };
+    DestinationName.propTypes = { id: PropTypes.number };
+
+    return (
         <View style={styles.container}>
             <View style={styles.background}>
                     <EvilIcons
@@ -20,33 +24,35 @@ export default function DestinationName({ locations, id }) {
                             ? <Text style={styles.text}>{tourStop.name}</Text> : null}
             </View>
         </View>
-    )
-
+    );
     }
 
     const styles = StyleSheet.create({
         container: {
             position: 'absolute',
-            top: 60,
-            height: 100,
+            top: 65,
+            height: 110,
             zIndex: 20,
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%'
         },
         background: {
-            height: 80,
+            height: 90,
             backgroundColor: '#97252B',
             zIndex: 20,
-            flexDirection:"row", 
+            flexDirection: "row", 
             alignItems: 'center', 
             justifyContent: 'center', 
-            width: 350,
+            width: 360,
             borderRadius: 15,
+            shadowColor: "#000",
+            shadowOpacity: 0.6,
+            shadowOffset: { width: 0, height: 0 },
         },
         text: {
             fontSize: 25, 
             color: 'white',
             
         },
-    })
+    });
