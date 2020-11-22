@@ -100,13 +100,7 @@ export default function Markers() {
         longitude: marker.longitude,
       }}
       title={marker.name}
-      onPress={() => {
-        setTransitStatus(false),
-          setID(marker.id),
-          setInfoShow(true),
-          setLatitude(marker.latitude),
-          setLongitude(marker.longitude);
-      }}
+  
     >
     </Marker>
   ));

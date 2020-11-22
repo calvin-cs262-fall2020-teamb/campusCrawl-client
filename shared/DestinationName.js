@@ -41,7 +41,7 @@ export default function DestinationName({ locations, id }) {
             flexDirection:"row", 
             alignItems: 'center', 
             justifyContent: 'center', 
-            width: 350,
+            width: 365,
             borderRadius: 15,
         },
         text: {
