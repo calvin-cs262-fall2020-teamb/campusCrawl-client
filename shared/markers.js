@@ -1,3 +1,19 @@
+/* title: map screen
+ * description: shows the user a map with their location and the marked tour stops
+ * details:
+ * always in the background
+ * uses booleans to set location data and tour status
+ * setRegion sets the map window
+ * startTour starts the tour sequence
+ * nextStop advances the tour sequence
+ * skipStop skips one ahead in the tour sequence
+ * endTour ends the tour sequence
+ * arriveAtLocation pulls up the location information and prepares for the next tour stop
+ * the information at each stop is pulled from the heroku data service
+ * markers for each stop are created with the pulled location data
+ * at any time the about screen can be reached using the button in the top right corner
+ */
+
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
@@ -56,8 +72,7 @@ export default function Markers() {
         setID(id + 1),
         setInfoShow(true),
         setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
-
-    }
+    };
 
     // Load data from webservice
     useEffect(() => {
@@ -130,8 +145,6 @@ export default function Markers() {
           />
           {markers}
         </MapView>
-
-        {console.log(inTransit)}
 
         { /* display components for tour */}
         {started ? null : <Start startTour={startTour} />}

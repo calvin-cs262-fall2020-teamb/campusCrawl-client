@@ -1,5 +1,12 @@
+/* title: start button screen
+ * description: allows the user to start a tour
+ * details:
+ * appears after the welcome screen is dismissed or after a tour is ended
+ * start button takes you to the destination guide/name screen of the first stop
+ */
+
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import PropTypes from 'prop-types';
 
 // create footer with button to start a tour

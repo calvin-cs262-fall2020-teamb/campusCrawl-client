@@ -1,3 +1,9 @@
+/* title: about screen
+ * description: gives the user information about how to use the app
+ * details:
+ * learnMore is a boolean that triggers the screen appearing and disappearing
+ */
+
 import React from "react";
 import { Text, View, Modal, Image } from "react-native";
 import { globalStyles } from "../styles/global";

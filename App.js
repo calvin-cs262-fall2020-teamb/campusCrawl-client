@@ -1,3 +1,10 @@
+/* title: app foundation
+ * description: launches the map screen which facilitates the tour
+ * details:
+ * runs automatically when the app is opened
+ * uses AppLoading and the boolean fontsLoaded to make sure the fonts load before the screen
+ */
+
 import React, { useState } from "react";
 import { View } from "react-native";
 import { globalStyles } from "./styles/global";

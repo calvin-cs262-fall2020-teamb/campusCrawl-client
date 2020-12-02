@@ -1,3 +1,12 @@
+/* title: destination guide screen
+ * description: gives the user their progress through the tour, and gives navigation options
+ * details:
+ * appears at the same time as destination name
+ * override button tells the app that you arrived and triggers the LocationInfo screen
+ * quit button calls a confirmation function before ending the tour
+ * skip button calls a confirmation function before skipping to the next stop
+ */
+
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from "react-native";
 import PropTypes from 'prop-types';
