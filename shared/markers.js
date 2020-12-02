@@ -146,6 +146,8 @@ export default function Markers() {
           {markers}
         </MapView>
 
+        {console.log(inTransit)}
+
         { /* display components for tour */}
         {started ? null : <Start startTour={startTour} />}
         {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
