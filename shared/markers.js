@@ -105,12 +105,17 @@ export default function Markers() {
     </Marker>
   ));
 
+
     return (
       <View style={{ zIndex: -1 }}>
         <MapView
           style={globalStyles.mapStyle}
           showsUserLocation={true}
           followsUserLocation={false}
+          showsPointsOfInterest={false}
+          showsIndoors={false}
+          showsBuildings={false}
+          customMapStyle={mapStyle}
           region={{
             latitude: latitude,
             longitude: longitude,
@@ -120,7 +125,7 @@ export default function Markers() {
         >
           { /* google maps street overlay */}
           <UrlTile
-            urlTemplate={"http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+            urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
           />
           {markers}
         </MapView>
@@ -153,4 +158,90 @@ export default function Markers() {
 
       </View>
     );
+    
 };
+
+const mapStyle = [
+  {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+  {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+  {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels.text.fill',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'poi',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'geometry',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'labels.text.fill',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry.stroke',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'labels.text.fill',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'transit',
+    elementType: 'geometry',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'transit.station',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#d59563'}],
+  },
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [{color: '#17263c'}],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [{visibility: 'off'}],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.stroke',
+    stylers: [{visibility: 'off'}],
+  },
+];
