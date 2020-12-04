@@ -8,6 +8,15 @@ const { width, height } = Dimensions.get("screen");
 // create a screen that shows the information of a location
 export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
+    const [tourStop] = locations.filter((item) => item.id === id);
+
+    // validate properties of locations, nextStop, endTour, and id
+    LocationInfo.propTypes = { locations: PropTypes.array };
+    LocationInfo.propTypes = { nextStop: PropTypes.func };
+    LocationInfo.propTypes = { endTour: PropTypes.func };
+    LocationInfo.propTypes = { id: PropTypes.number };
+
+
     const [alignment] = useState(new Animated.Value(0));
 
     const bringUpActionSheet = () => {
@@ -28,7 +37,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
     const actionSheetIntropolate = alignment.interpolate({
         inputRange: [0, 1],
-        outputRange: [-height / 2.4 + 50, 0]
+        outputRange: [-height / 1.5 +100, 0]
     });
 
     const actionSheetStyle = {
@@ -36,27 +45,70 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
     }
 
     const gestureHandler = (e) => {
-        console.log("hello");
+       
         if(e.nativeEvent.contentOffset.y > 0) 
         bringUpActionSheet();
         else hideTheActionSheet();
     };
 
+    const quitConfirmation = () =>
+    Alert.alert(
+      "Quit tour",
+      "Are you sure you want to quit?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => endTour() }
+      ],
+      { cancelable: false }
+    );
+
     return (
+        <View>
         <Animated.View style={[styles.container, actionSheetStyle]}>
             <View>
                 <ScrollView 
-                    onScrollBeginDrag = {(event) => gestureHandler(event)}
+                    onScroll = {(event) => gestureHandler(event)}
                     //onScroll={(e) => gestureHandler(e)}
                     style={styles.grabber}>
-                        <Text>hey</Text>
-                        <Text>hi whats up</Text>
-                        <Text> Nevermind</Text>
+                        <Text style={{color: "transparent"}}>Hi</Text>  
+                   
+                    <Image style={styles.image} source={{ uri: tourStop.image }} />
+                    <View style={styles.titlewrap}>
+                        <Text style={styles.title}>{tourStop.greeting}</Text>
+                    </View>
+                      
+                </ScrollView>
+                <ScrollView style={{top: 10, marginBottom: 630}}>
+                    <View style={styles.infowrap}>
+                        <Text style={styles.info}>{tourStop.description}</Text>
+                    </View>
                 </ScrollView>
             </View>
-            <Text >Hello This is Action Sheet</Text>
 
         </Animated.View>
+         <View style={styles.buttonwrap}>
+         { /* show Next Stop button if not last stop */}
+         {locations.filter((item) => item.id === id + 1)[0]
+             ? <TouchableOpacity style={[styles.button1, { right: 20 }]} onPress={() => { 
+                 nextStop(); 
+                 }}
+               >
+                 <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>NEXT  </Text>
+                 <AntDesign name="rightcircleo" size={22} color="#3b3b3b" />
+             </TouchableOpacity>
+             : null}
+
+         {/* end tour button  */}
+         <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={ quitConfirmation }>
+             <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
+             <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
+         </TouchableOpacity>
+     </View>
+     </View>
     );
 }
 
@@ -66,21 +118,105 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        height: height/2.4,
+        height: height/2.4 + 530,
         width: width/1.05,
         borderTopRightRadius: 40,
         marginHorizontal: 10,
-        backgroundColor: "white",
+        backgroundColor: "transparent",
         zIndex: 30,
         
     }    ,
     grabber: {
         left: 0,
-        width: 1000,
-        height: 50,
-        borderTopWidth: 10,
-        borderTopColor: '#aaa',
-        backgroundColor: "red"
-    } 
+        width: 375,
+        height: 490,
+        
+    } ,
+    image: {
+        
+        width: '100%',
+        height: 200,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    image2: {
+        position: 'absolute',
+        alignSelf: 'center',
+        zIndex: 31,
+        width: '100%',
+        height: 210,
+        top: 200,
+    },
+    title: {
+        fontFamily: 'Lato-Regular',
+        fontSize: 28,
+        color: '#3b3b3b',
+        zIndex: 35,
+        textAlign: 'center',
+    },
+    titlewrap: {
+        backgroundColor: 'rgba(255,255,255,0.75)',
+        zIndex: 32,
+        top: 5,
+        alignSelf: 'center',
+        width: 375,
+        paddingVertical: 5,
+        borderRadius: 10,
+        paddingBottom: 20,
+    },
+    info: {
+        fontFamily: 'Lato-Light',
+        fontSize: 15,
+        zIndex: 38,
+        textAlign: 'justify',
+        color: '#000'
+    },
+    infowrap: {
+        backgroundColor: 'white',
+        padding: 20
+    },
+    buttonwrap: {
+        backgroundColor: '#3b3b3b',
+        height: 90,
+        width: '100%',
+        bottom: 30,
+        zIndex: 32,
+        shadowColor: "#000",
+        shadowOpacity: 0.8,
+        shadowOffset: { width: 0, height: 0 },
+    },
+    button1: {
+        position: 'absolute',
+        bottom: 24,
+        zIndex: 35,
+        // backgroundColor: '#FFD700',
+        backgroundColor: '#E8CC16',
+        paddingVertical: 12,
+        // paddingHorizontal: 15,
+        width: 210,
+        borderRadius: 25,
+        shadowColor: "#000",
+        shadowOpacity: 0.6,
+        shadowOffset: { width: 0, height: 0 },
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    button2: {
+        position: 'absolute',
+        bottom: 24,
+        zIndex: 35,
+        backgroundColor: '#C0C0C0',
+        paddingVertical: 12,
+        // paddingHorizontal: 15,
+        width: 100,
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOpacity: 0.6,
+        shadowOffset: { width: 0, height: 0 },
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     
 });
