@@ -1,3 +1,10 @@
+/* title: welcome screen
+ * description: introduces the user to the app
+ * details:
+ * appears when the app is opened
+ * let's go button dismisses the screen by setting the welcomeScreen boolean to false
+ */
+
 import React, { useState } from "react";
 import {
   StyleSheet,

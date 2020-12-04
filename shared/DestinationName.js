@@ -1,3 +1,10 @@
+/* title: destination name screen
+ * description: tells the user which stop they are heading towards
+ * details:
+ * appears at the same time as destination guide
+ * filters the locations array to get the name of the next stop
+ */
+
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PropTypes from 'prop-types';

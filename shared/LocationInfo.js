@@ -1,3 +1,13 @@
+/* title: location information screen
+ * description: gives the user a picture and details about each location
+ * details:
+ * appears when you click override on the destination guide screen
+ * filters the locations array to get the right information for each tour stop
+ * pops up as a half-screen, but can be swiped up to see more information
+ * next button takes you to the destination guide/name screen of the next stop
+ * quit button calls a confirmation function before ending the tour
+ */
+
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';

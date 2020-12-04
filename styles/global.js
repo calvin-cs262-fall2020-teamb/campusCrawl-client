@@ -1,5 +1,11 @@
+/* title: global styles
+ * description: styles used in multiple modules
+ * details:
+ * defines the width of the screen as a variable for easy reference
+ */
+
 import { StyleSheet, Dimensions } from "react-native";
-var width = Dimensions.get('window').width;
+const width = Dimensions.get('window').width;
 
 export const globalStyles = StyleSheet.create({
   container: {
