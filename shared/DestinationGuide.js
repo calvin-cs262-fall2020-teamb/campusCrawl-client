@@ -72,19 +72,19 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
         <View style={styles.bar}>
           
 
-            <View style={{ flexDirection: "row", marginTop: 5, justifyContent: 'center', height: 50, marginBottom: 10 }}>
+            <View style={{ flexDirection: "row", marginTop: 5, justifyContent: 'center', height: "37%", marginBottom: 10 }}>
                 <TouchableOpacity style={[styles.button, { flexDirection: "row" }]} onPress={ quitConfirmation }>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>QUIT  </Text>
                     <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
                 
                 {locations.filter((item) => item.id === id + 2)[0]
-                    ? <TouchableOpacity style={[styles.button, { marginLeft: 15, width: 90, flexDirection: "row", backgroundColor: "#97252B" }]} onPress={ skipConfirmation }>
+                    ? <TouchableOpacity style={[styles.button, { marginLeft: 15, width: "22%", flexDirection: "row", backgroundColor: "#97252B" }]} onPress={ skipConfirmation }>
                         <Text style={{ fontSize: 20, color: '#fff', fontFamily: 'Lato-Regular' }}>SKIP  </Text>
                         <Feather name="skip-forward" size={22} color="#fff" />
                     </TouchableOpacity> : null}
 
-                <TouchableOpacity style={[styles.button, { marginLeft: 10, width: 190, backgroundColor: "#E8CC16", borderRadius: 25, flexDirection: "row" }]} onPress={() => { arriveAtLocation(); }}>
+                <TouchableOpacity style={[styles.button, { marginLeft: 10, width: "45%", backgroundColor: "#E8CC16", borderRadius: 25, flexDirection: "row" }]} onPress={() => { arriveAtLocation(); }}>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', textAlign: 'center' }}>I&apos;M THERE   </Text>
                     <AntDesign name="checkcircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
@@ -105,16 +105,16 @@ const styles = StyleSheet.create({
         resizeMode: 'contain', 
         width: '100%', 
         height: '100%',
-        bottom: 35,
+        bottom: "27%",
         marginTop: 5,
         zIndex: 12,
     },
     bar: {
         zIndex: 15,
         position: 'absolute',
-        bottom: 10,
+        bottom: "1%",
         flex: 1,
-        height: 135,
+        height: "15%",
         width: '100%',
         backgroundColor: "transparent",
     },
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#C0C0C0',
         paddingVertical: 12,
         // paddingHorizontal: 15,
-        width: 90,
+        width: "22%",
         borderRadius: 5,
         shadowColor: "#000",
         shadowOpacity: 0.6,
