@@ -11,6 +11,8 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from "react-native";
 import PropTypes from 'prop-types';
 import { globalStyles } from "../styles/global";
+import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons'; 
 
 // create a screen that guides the user between stops
 export default function DestinationGuide({ locations, id, endTour, skipStop, arriveAtLocation }) {
@@ -25,6 +27,7 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
         require('../images/6.jpg'),
         require('../images/7.jpg'),
     ];
+
 
     const nextID = id + 1;
     const skipConfirmation = () =>
@@ -70,20 +73,20 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
           
 
             <View style={{ flexDirection: "row", marginTop: 5, justifyContent: 'center', height: 50, marginBottom: 10 }}>
-                <TouchableOpacity style={ styles.button } onPress={ quitConfirmation }>
-                    <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>Quit</Text>
+                <TouchableOpacity style={[styles.button, { flexDirection: "row" }]} onPress={ quitConfirmation }>
+                    <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>QUIT  </Text>
+                    <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
                 
                 {locations.filter((item) => item.id === id + 2)[0]
-                    ? <TouchableOpacity style={[styles.button, { marginLeft: 20, width: 125 }]} onPress={ skipConfirmation }>
-                        <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>Skip Stop</Text>
+                    ? <TouchableOpacity style={[styles.button, { marginLeft: 15, width: 90, flexDirection: "row", backgroundColor: "#97252B" }]} onPress={ skipConfirmation }>
+                        <Text style={{ fontSize: 20, color: '#fff', fontFamily: 'Lato-Regular' }}>SKIP  </Text>
+                        <Feather name="skip-forward" size={22} color="#fff" />
                     </TouchableOpacity> : null}
 
-                <TouchableOpacity style={[styles.button, { marginLeft: 20, width: 140 }]} onPress={() => { 
-                    arriveAtLocation();
-                    }}
-                >
-                    <Text style={{ fontSize: 16, color: '#3b3b3b', fontFamily: 'Lato-Regular', textAlign: 'center' }}>Override: I&apos;m there</Text>
+                <TouchableOpacity style={[styles.button, { marginLeft: 10, width: 190, backgroundColor: "#E8CC16", borderRadius: 25, flexDirection: "row" }]} onPress={() => { arriveAtLocation(); }}>
+                    <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', textAlign: 'center' }}>I&apos;M THERE   </Text>
+                    <AntDesign name="checkcircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
                 
             </View>
@@ -121,13 +124,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#C0C0C0',
         paddingVertical: 12,
         // paddingHorizontal: 15,
-        width: 80,
+        width: 90,
         borderRadius: 5,
         shadowColor: "#000",
         shadowOpacity: 0.6,
         shadowOffset: { width: 0, height: 0 },
         justifyContent: 'center',
         alignItems: 'center',
+        alignContent: 'center',
         zIndex: 20
     }
 

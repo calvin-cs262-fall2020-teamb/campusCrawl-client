@@ -15,7 +15,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import MapView, { Marker, UrlTile } from "react-native-maps";
+import MapView, { Marker, UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 import { View, TouchableOpacity, Text } from "react-native";
 import Start from "./startButton";
@@ -131,7 +131,10 @@ export default function Markers() {
           showsPointsOfInterest={false}
           showsIndoors={false}
           showsBuildings={false}
+          provider={PROVIDER_GOOGLE}
           customMapStyle={mapStyle}
+          // provider='google'
+          // mapType='satellite'
           region={{
             latitude: latitude,
             longitude: longitude,
@@ -142,7 +145,7 @@ export default function Markers() {
           { /* google maps street overlay */}
           <UrlTile
             urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
-          />
+          /> 
           {markers}
         </MapView>
 
@@ -178,7 +181,7 @@ export default function Markers() {
 const mapStyle = [
   {
     featureType: 'poi',
-    stylers: [{visibility: 'off'}],
+    stylers: [{ visibility: 'off' }],
   },
   
 ];
