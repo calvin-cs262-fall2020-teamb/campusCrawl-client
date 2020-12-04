@@ -1,185 +1,86 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView, Alert, Animated } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+
+const { width, height } = Dimensions.get("screen");
 
 // create a screen that shows the information of a location
 export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
-    // array destructuring to give tourStop the first item in the array
-    const [tourStop] = locations.filter((item) => item.id === id);
+    const [alignment] = useState(new Animated.Value(0));
 
-    // validate properties of locations, nextStop, endTour, and id
-    LocationInfo.propTypes = { locations: PropTypes.array };
-    LocationInfo.propTypes = { nextStop: PropTypes.func };
-    LocationInfo.propTypes = { endTour: PropTypes.func };
-    LocationInfo.propTypes = { id: PropTypes.number };
+    const bringUpActionSheet = () => {
+        Animated.timing(alignment, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: false
+        }).start();
+    };
 
-    const quitConfirmation = () =>
-    Alert.alert(
-      "Quit tour",
-      "Are you sure you want to quit?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "Yes", onPress: () => endTour() }
-      ],
-      { cancelable: false }
-    );
+    const hideTheActionSheet = () => {
+        Animated.timing(alignment, {
+            toValue: 0,
+            duration: 500,
+            useNativeDriver:false
+        }).start();
+    };
+
+    const actionSheetIntropolate = alignment.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-height / 2.4 + 50, 0]
+    });
+
+    const actionSheetStyle = {
+        bottom: actionSheetIntropolate
+    }
+
+    const gestureHandler = (e) => {
+        console.log("hello");
+        if(e.nativeEvent.contentOffset.y > 0) 
+        bringUpActionSheet();
+        else hideTheActionSheet();
+    };
 
     return (
-        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%' }}>
-            <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces="false">
-                { /* empty element in ScrollView to start infoContainer lower */}
-                <View style={styles.clear}>
-                </View>
-                { /* second element in ScrollView, location info */}
-                <View style={styles.infoContainer}>
-                    <View style={styles.titlewrap}>
-                        <Text style={styles.title}>{tourStop.greeting}</Text>
-                    </View>
-                    <Image style={styles.image} source={{ uri: tourStop.image }} />
-                    <View style={styles.infowrap}>
-                        <Text style={styles.info}>{tourStop.description}</Text>
-                    </View>
-                </View>
-            </ScrollView>
-
-            <View style={styles.buttonwrap}>
-                { /* show Next Stop button if not last stop */}
-                {locations.filter((item) => item.id === id + 1)[0]
-                    ? <TouchableOpacity style={[styles.button1, { right: 20 }]} onPress={() => { 
-                        nextStop(); 
-                        }}
-                      >
-                        <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>NEXT  </Text>
-                        <AntDesign name="rightcircleo" size={22} color="#3b3b3b" />
-                    </TouchableOpacity>
-                    : null}
-
-                {/* end tour button  */}
-                <TouchableOpacity style={[styles.button2, { left: 20 }]} onPress={ quitConfirmation }>
-                    <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', }}>QUIT  </Text>
-                    <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
-                </TouchableOpacity>
+        <Animated.View style={[styles.container, actionSheetStyle]}>
+            <View>
+                <ScrollView 
+                    onScrollBeginDrag = {(event) => gestureHandler(event)}
+                    //onScroll={(e) => gestureHandler(e)}
+                    style={styles.grabber}>
+                        <Text>hey</Text>
+                        <Text>hi whats up</Text>
+                        <Text> Nevermind</Text>
+                </ScrollView>
             </View>
-        </View>
+            <Text >Hello This is Action Sheet</Text>
+
+        </Animated.View>
     );
 }
 
 const styles = StyleSheet.create({
-    clear: {
-        height: 440,
-    },
-    infoContainer: {
-        height: 1140,
-        backgroundColor: '#97252B',
-        zIndex: 30,
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
-        shadowColor: '#A0A0A0',
-        shadowOffset: { width: 0, height: -5 },
-        shadowOpacity: 0.8,
-    },
-    title: {
-        fontFamily: 'Lato-Regular',
-        fontSize: 28,
-        color: '#3b3b3b',
-        zIndex: 35,
-        textAlign: 'center',
-    },
-    titlewrap: {
-        backgroundColor: 'rgba(255,255,255,0.75)',
-        zIndex: 32,
-        top: 5,
-        alignSelf: 'center',
-        width: 375,
-        paddingVertical: 5,
-        borderRadius: 10,
-    },
-    infowrap: {
-        position: 'absolute',
-        paddingHorizontal: 8,
-        paddingVertical: 5,
-        height: 900,
-        backgroundColor: '#F2F2F2',
-        zIndex: 35,
-        width: 390,
-        alignSelf: 'center',
-        top: 210,
-        borderRadius: 8,
-        shadowColor: "#000",
-        shadowOpacity: 0.6,
-        shadowOffset: { width: 0, height: 0 },
-    },
-    info: {
-        fontFamily: 'Lato-Light',
-        fontSize: 15,
-        zIndex: 38,
-        textAlign: 'justify',
-        color: '#000'
-    },
-    buttonwrap: {
-        backgroundColor: '#3b3b3b',
-        height: 90,
-        width: '100%',
+    container: {
+        position: "absolute",
+        left: 0,
+        right: 0,
         bottom: 0,
-        zIndex: 32,
-        shadowColor: "#000",
-        shadowOpacity: 0.8,
-        shadowOffset: { width: 0, height: 0 },
-    },
-    button1: {
-        position: 'absolute',
-        bottom: 24,
-        zIndex: 35,
-        // backgroundColor: '#FFD700',
-        backgroundColor: '#E8CC16',
-        paddingVertical: 12,
-        // paddingHorizontal: 15,
-        width: 210,
-        borderRadius: 25,
-        shadowColor: "#000",
-        shadowOpacity: 0.6,
-        shadowOffset: { width: 0, height: 0 },
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    button2: {
-        position: 'absolute',
-        bottom: 24,
-        zIndex: 35,
-        backgroundColor: '#C0C0C0',
-        paddingVertical: 12,
-        // paddingHorizontal: 15,
-        width: 100,
-        borderRadius: 5,
-        shadowColor: "#000",
-        shadowOpacity: 0.6,
-        shadowOffset: { width: 0, height: 0 },
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    image: {
-        position: 'absolute',
-        alignSelf: 'center',
-        zIndex: 31,
-        width: '100%',
-        height: 200,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-    },
-    image2: {
-        position: 'absolute',
-        alignSelf: 'center',
-        zIndex: 31,
-        width: '100%',
-        height: 210,
-        top: 200,
-    },
+        height: height/2.4,
+        width: width/1.05,
+        borderTopRightRadius: 40,
+        marginHorizontal: 10,
+        backgroundColor: "white",
+        zIndex: 30,
+        
+    }    ,
+    grabber: {
+        left: 0,
+        width: 1000,
+        height: 50,
+        borderTopWidth: 10,
+        borderTopColor: '#aaa',
+        backgroundColor: "red"
+    } 
+    
 });

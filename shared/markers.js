@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import * as Location from "expo-location";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Dimensions } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
@@ -128,6 +128,7 @@ export default function Markers() {
             urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
           />
           {markers}
+          
         </MapView>
 
         {console.log(inTransit)}
