@@ -69,9 +69,9 @@ export default function Markers() {
 
   const arriveAtLocation = () => {
     setTransitStatus(false),
-          setID(id+1),
-          setInfoShow(true),
-          setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
+      setID(id + 1),
+      setInfoShow(true),
+      setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
 
   }
 
@@ -116,66 +116,66 @@ export default function Markers() {
         longitude: marker.longitude,
       }}
       title={marker.name}
-  
+
     >
     </Marker>
   ));
 
 
-    return (
-      <View style={{ zIndex: -1 }}>
-        <MapView
-          style={globalStyles.mapStyle}
-          showsUserLocation={true}
-          followsUserLocation={false}
-          showsPointsOfInterest={false}
-          showsIndoors={false}
-          showsBuildings={false}
-          provider={PROVIDER_GOOGLE}
-          customMapStyle={mapStyle}
-          // provider='google'
-          // mapType='satellite'
-          region={{
-            latitude: latitude,
-            longitude: longitude,
-            latitudeDelta: 0.0032,
-            longitudeDelta: 0.0031,
-          }}
-        >
-          { /* google maps street overlay */}
-          <UrlTile
-            urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
-          /> 
-          {markers}
-        </MapView>
+  return (
+    <View style={{ zIndex: -1 }}>
+      <MapView
+        style={globalStyles.mapStyle}
+        showsUserLocation={true}
+        followsUserLocation={false}
+        showsPointsOfInterest={false}
+        showsIndoors={false}
+        showsBuildings={false}
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={mapStyle}
+        // provider='google'
+        // mapType='satellite'
+        region={{
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.0032,
+          longitudeDelta: 0.0031,
+        }}
+      >
+        { /* google maps street overlay */}
+        <UrlTile
+          urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
+        />
+        {markers}
+      </MapView>
 
-        { /* display components for tour */}
-        {started ? null : <Start startTour={startTour} />}
-        {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
-        {inTransit ? <DestinationName locations={locations} id={id} /> : null}
+      { /* display components for tour */}
+      {started ? null : <Start startTour={startTour} />}
+      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
+      {inTransit ? <DestinationName locations={locations} id={id} /> : null}
 
 
-        {showInfo ? (
-          <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
-        ) : null}
+      {showInfo ? (
+        <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
+      ) : null}
 
-        <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
-        { /* info button to toggle Modal */}
-        <TouchableOpacity style={globalStyles.modalToggle}>
-          <View>
-            <MaterialIcons
-              name='info'
-              size={28}
-              onPress={() => setLearnMore(true)}
-            />
-          </View>
-        </TouchableOpacity>
+      <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
+      { /* info button to toggle Modal */}
+      <TouchableOpacity style={globalStyles.modalToggle}>
+        <View>
+          <MaterialIcons
+            name='info'
+            size={28}
+            onPress={() => setLearnMore(true)}
+          />
+        </View>
+      </TouchableOpacity>
 
-        <WelcomeScreen endTour={endTour} />
+      <WelcomeScreen endTour={endTour} setLearnMore={setLearnMore} />
 
-      </View>
-    );
-    
+    </View>
+  );
+
 };
 
 const mapStyle = [
@@ -183,5 +183,5 @@ const mapStyle = [
     featureType: 'poi',
     stylers: [{ visibility: 'off' }],
   },
-  
+
 ];
