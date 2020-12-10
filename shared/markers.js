@@ -22,6 +22,7 @@ import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
 import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; 
 
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
@@ -131,10 +132,10 @@ export default function Markers() {
         showsPointsOfInterest={false}
         showsIndoors={false}
         showsBuildings={false}
-        provider={PROVIDER_GOOGLE}
-        customMapStyle={mapStyle}
-        // provider='google'
-        // mapType='satellite'
+        // provider={PROVIDER_GOOGLE}
+        // customMapStyle={mapStyle}
+        provider='google'
+        mapType='satellite'
         region={{
           latitude: latitude,
           longitude: longitude,
@@ -143,9 +144,9 @@ export default function Markers() {
         }}
       >
         { /* google maps street overlay */}
-        <UrlTile
+        {/*<UrlTile
           urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
-        />
+        />*/}
         {markers}
       </MapView>
 
@@ -162,11 +163,12 @@ export default function Markers() {
       <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
       { /* info button to toggle Modal */}
       <TouchableOpacity style={globalStyles.modalToggle}>
-        <View>
+        <View style={{ backgroundColor:"black", borderRadius:15 }}> 
           <MaterialIcons
             name='info'
-            size={28}
+            size={30}
             onPress={() => setLearnMore(true)}
+            color='white'
           />
         </View>
       </TouchableOpacity>
