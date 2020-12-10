@@ -11,6 +11,7 @@ import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
 import DestinationName from "./DestinationName";
 import { globalStyles } from "../styles/global";
+import OldLocationInfo from "./oldLocationInfo"
 
 // define markers component to place on the map
 export default function Markers() {
@@ -140,7 +141,7 @@ export default function Markers() {
 
 
         {showInfo ? (
-          <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
+          <OldLocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
         ) : null}
 
         <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />

@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView, Alert, Animated } from 'react-native';
+import {WebView} from 'react-native-webview'
+import HTML from "react-native-render-html"
 import { AntDesign } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import SwipeUpDown from 'react-native-swipe-up-down';
+//import BottomSheet from 'reanimated-bottom-sheet'
 
 const { width, height } = Dimensions.get("screen");
 
@@ -37,7 +41,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
     const actionSheetIntropolate = alignment.interpolate({
         inputRange: [0, 1],
-        outputRange: [-height / 1.5 +100, 1]
+        outputRange: [-height / 1.5 + 300, 50]
     });
 
     const actionSheetStyle = {
@@ -67,29 +71,24 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
     );
 
     return (
-        <View>
-        <Animated.View style={[styles.container, actionSheetStyle]}>
-            <View>
-                <ScrollView 
+        <View pointerEvents="box-none">
+        <Animated.View pointerEvents="box-none" style={[styles.container, actionSheetStyle]}>
+                <ScrollView pointerEvents="box-none" contentContainerStyle={{padding: 16}}
                     onScroll = {(event) => gestureHandler(event)}
                     //onScroll={(e) => gestureHandler(e)}
                     style={styles.grabber}>
-                        <Text style={{color: "transparent"}}>Hi</Text>  
+                    <View pointerEvents="none" style={{height: 100, backgroundColor: 'transparent'}} /> 
                    
                     <Image style={styles.image} source={{ uri: tourStop.image }} />
                     <View style={styles.titlewrap}>
                         <Text style={styles.title}>{tourStop.greeting}</Text>
                     </View>
-                      
-                </ScrollView>
-                <ScrollView style={{top: 10, marginBottom: 400}}>
                     <View style={styles.infowrap}>
-                        <Text style={styles.info}>{tourStop.description}</Text>
+                        {/* <Text style={styles.info}>{tourStop.description}</Text> */}
+                        <HTML source={{html: tourStop.description}} />
                     </View>
                 </ScrollView>
-            </View>
            
-
         </Animated.View>
         <View style={styles.buttonwrap}>
          { /* show Next Stop button if not last stop */}
@@ -118,8 +117,8 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 0,
         right: 0,
-        bottom: 0,
-        height: height/2.4 + 500,
+       
+        height: height/2.4 + 300,
         width: width/1.05,
         borderTopRightRadius: 40,
         marginHorizontal: 10,
@@ -130,8 +129,8 @@ const styles = StyleSheet.create({
     grabber: {
         left: 0,
         width: 375,
-        height: '40%',
-        
+        height: '100%',
+        bottom: 0
     } ,
     image: {
         

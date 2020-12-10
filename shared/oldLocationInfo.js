@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 // create a screen that shows the information of a location
-export default function LocationInfo({ locations, nextStop, endTour, id }) {
+export default function OldLocationInfo({ locations, nextStop, endTour, id }) {
 
     // array destructuring to give tourStop the first item in the array
     const [tourStop] = locations.filter((item) => item.id === id);
 
     // validate properties of locations, nextStop, endTour, and id
-    LocationInfo.propTypes = { locations: PropTypes.array };
-    LocationInfo.propTypes = { nextStop: PropTypes.func };
-    LocationInfo.propTypes = { endTour: PropTypes.func };
-    LocationInfo.propTypes = { id: PropTypes.number };
+    OldLocationInfo.propTypes = { locations: PropTypes.array };
+    OldLocationInfo.propTypes = { nextStop: PropTypes.func };
+    OldLocationInfo.propTypes = { endTour: PropTypes.func };
+    OldLocationInfo.propTypes = { id: PropTypes.number };
 
     const quitConfirmation = () =>
     Alert.alert(
@@ -29,24 +29,55 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
       ],
       { cancelable: false }
     );
+    const [HEIGHT, setHeight] = useState(400);
+    const [offset, setOffset] = useState(0);
+    const [testVal, setTestVal] = useState(400);
+    
+    const _onScroll = (event) => {
+        // from the nativeEvent we can get the contentOffsett
+        var offset_y = event.nativeEvent.contentOffset.y;
+        var direction = offset_y > offset ? 'down' : 'up';
+        console.log(direction);
+        setOffset(offset_y);
+        console.log("h: ", HEIGHT);
+        console.log("Y: ", offset_y);
+
+        if (direction=='down' ) {
+         if (testVal>=0){
+          // we are scrolling down the list, decrease height of the empty view
+            setTestVal(testVal-offset_y)
+            setHeight(HEIGHT-offset_y)
+         }
+         //else{ setHeight(0)}
+        }
+        if (direction=='up'){
+            setTestVal(testVal+offset_y)
+            setHeight(HEIGHT+offset_y)
+        }
+      }
 
     return (
-        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%' }}>
-            <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces="false">
-                { /* empty element in ScrollView to start infoContainer lower */}
-                <View style={styles.clear}>
-                </View>
-                { /* second element in ScrollView, location info */}
-                <View style={styles.infoContainer}>
-                    <View style={styles.titlewrap}>
-                        <Text style={styles.title}>{tourStop.greeting}</Text>
+        <View 
+       pointerEvents="box-none"
+        style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent',  bottom: 0, width: '100%' }}>
+           
+            <View  pointerEvents="box-none"style={{height: '100%', width: '100%', position: 'absolute'}}>
+                <View pointerEvents="none" style={{height: HEIGHT, backgroundColor: 'transparent'}} />
+                <View style={{ top: testVal-400, height: 850-HEIGHT, backgroundColor: 'white'}}>
+                    <ScrollView  onScroll={(event)=> _onScroll(event)}>
+                        <View style={styles.infoContainer}>
+                        <View style={styles.titlewrap}>
+                            <Text style={styles.title}>{tourStop.greeting}</Text>
+                        </View>
+                        <Image style={styles.image} source={{ uri: tourStop.image }} />
+                        <View style={styles.infowrap}>
+                            <Text style={styles.info}>{tourStop.description}</Text>
+                        </View>
                     </View>
-                    <Image style={styles.image} source={{ uri: tourStop.image }} />
-                    <View style={styles.infowrap}>
-                        <Text style={styles.info}>{tourStop.description}</Text>
-                    </View>
+                    </ScrollView>
                 </View>
-            </ScrollView>
+                </View>
+            
 
             <View style={styles.buttonwrap}>
                 { /* show Next Stop button if not last stop */}
