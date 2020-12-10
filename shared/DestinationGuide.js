@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     bar: {
         zIndex: 15,
         position: 'absolute',
-        bottom: 10,
+        bottom: 0,
         flex: 1,
         height: 135,
         width: '100%',

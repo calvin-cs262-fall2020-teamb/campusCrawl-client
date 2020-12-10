@@ -37,7 +37,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
     const actionSheetIntropolate = alignment.interpolate({
         inputRange: [0, 1],
-        outputRange: [-height / 1.5 +100, 0]
+        outputRange: [-height / 1.5 +100, 1]
     });
 
     const actionSheetStyle = {
@@ -82,15 +82,16 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
                     </View>
                       
                 </ScrollView>
-                <ScrollView style={{top: 10, marginBottom: 630}}>
+                <ScrollView style={{top: 10, marginBottom: 400}}>
                     <View style={styles.infowrap}>
                         <Text style={styles.info}>{tourStop.description}</Text>
                     </View>
                 </ScrollView>
             </View>
+           
 
         </Animated.View>
-         <View style={styles.buttonwrap}>
+        <View style={styles.buttonwrap}>
          { /* show Next Stop button if not last stop */}
          {locations.filter((item) => item.id === id + 1)[0]
              ? <TouchableOpacity style={[styles.button1, { right: 20 }]} onPress={() => { 
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        height: height/2.4 + 530,
+        height: height/2.4 + 500,
         width: width/1.05,
         borderTopRightRadius: 40,
         marginHorizontal: 10,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     grabber: {
         left: 0,
         width: 375,
-        height: 490,
+        height: '40%',
         
     } ,
     image: {
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
         width: 375,
         paddingVertical: 5,
         borderRadius: 10,
-        paddingBottom: 20,
+        paddingBottom: 10,
     },
     info: {
         fontFamily: 'Lato-Light',
@@ -176,18 +177,17 @@ const styles = StyleSheet.create({
         padding: 20
     },
     buttonwrap: {
-        backgroundColor: '#3b3b3b',
-        height: 90,
+        zIndex: 35,
+        position: 'absolute',
+        bottom: 0,
+        flex: 1,
+        height: 75,
         width: '100%',
-        bottom: 30,
-        zIndex: 32,
-        shadowColor: "#000",
-        shadowOpacity: 0.8,
-        shadowOffset: { width: 0, height: 0 },
+        backgroundColor: "white",
     },
     button1: {
         position: 'absolute',
-        bottom: 24,
+        bottom: 15,
         zIndex: 35,
         // backgroundColor: '#FFD700',
         backgroundColor: '#E8CC16',
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     },
     button2: {
         position: 'absolute',
-        bottom: 24,
+        bottom: 15,
         zIndex: 35,
         backgroundColor: '#C0C0C0',
         paddingVertical: 12,
