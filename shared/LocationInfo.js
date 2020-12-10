@@ -43,9 +43,12 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
     return (
         <View style={{ height: '90%', zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%'}}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10,  padding: 5}} bounces="false">
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{alignItems: 'center'}} style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10,  padding: 5 }} bounces="false">
                 { /* empty element in ScrollView to start infoContainer lower */}
                 <View style={styles.clear}>
+                </View>
+                <View style={styles.grabber}>
+
                 </View>
                 { /* second element in ScrollView, location info */}
                 <View style={styles.infoContainer}>
@@ -53,7 +56,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
                         <Text style={styles.title}>{tourStop.greeting}</Text>
                     </View>
                     <Image style={styles.image} source={{ uri: tourStop.image }} />
-                    <ScrollView contentContainerStyle={{paddingBottom: 1700}} nestedScrollEnabled={true} style={styles.infowrap}>
+                    <ScrollView contentContainerStyle={{paddingBottom: 1640}} nestedScrollEnabled={true} style={styles.infowrap}>
                         <HTML style={{ paddingBottom: 800,}} source={{ html: tourStop.description}} />
                         {/* <Text style={styles.info}>{tourStop.description}</Text> */}
                     </ScrollView>
@@ -84,7 +87,14 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
 const styles = StyleSheet.create({
     clear: {
-        height: 300,
+        height: 350,
+    },
+    grabber: {
+        backgroundColor: "lightgray",
+        height: 8,
+        width: 80,
+        marginBottom: 5,
+        borderRadius: 8
     },
     infoContainer: {
         height: 595,
