@@ -15,14 +15,13 @@
  */
 
 import React, { useState, useEffect } from "react";
-import MapView, { Marker, UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker,  } from "react-native-maps";
 import * as Location from "expo-location";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity,  } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons'; 
 
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
@@ -178,12 +177,6 @@ export default function Markers() {
     </View>
   );
 
-};
+}
 
-const mapStyle = [
-  {
-    featureType: 'poi',
-    stylers: [{ visibility: 'off' }],
-  },
 
-];
