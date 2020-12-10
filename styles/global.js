@@ -34,7 +34,7 @@ export const globalStyles = StyleSheet.create({
     bottom: 10,
     left: 0,
     right: 18,
-    height: 25,
+    height: 30,
   },
   learnModal: {
     flex: 1,

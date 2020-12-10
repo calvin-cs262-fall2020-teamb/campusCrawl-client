@@ -41,7 +41,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
     );
 
     return (
-        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%' }}>
+        <View style={{ height: 825, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%' }}>
             <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces="false">
                 { /* empty element in ScrollView to start infoContainer lower */}
                 <View style={styles.clear}>
