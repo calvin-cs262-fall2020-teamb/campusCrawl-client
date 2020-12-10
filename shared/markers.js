@@ -22,6 +22,7 @@ import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
 import { MaterialIcons } from '@expo/vector-icons';
+import { MapViewDirections } from 'react-native-maps-directions'
 
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
@@ -69,9 +70,9 @@ export default function Markers() {
 
   const arriveAtLocation = () => {
     setTransitStatus(false),
-          setID(id+1),
-          setInfoShow(true),
-          setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
+      setID(id + 1),
+      setInfoShow(true),
+      setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
 
   }
 
@@ -107,6 +108,14 @@ export default function Markers() {
     text = JSON.stringify(location);
   }
 
+  // Array of Stops
+  const coordinates = [
+    {
+      latitude: ,
+      longitude
+    }
+  ]
+
   // define markers with an id, name, coordinates, and press ability
   let markers = locations.map(marker => (
     <Marker
@@ -116,66 +125,125 @@ export default function Markers() {
         longitude: marker.longitude,
       }}
       title={marker.name}
-  
+
     >
     </Marker>
   ));
 
 
-    return (
-      <View style={{ zIndex: -1 }}>
-        <MapView
-          style={globalStyles.mapStyle}
-          showsUserLocation={true}
-          followsUserLocation={false}
-          showsPointsOfInterest={false}
-          showsIndoors={false}
-          showsBuildings={false}
-          provider={PROVIDER_GOOGLE}
-          customMapStyle={mapStyle}
-          // provider='google'
-          // mapType='satellite'
-          region={{
-            latitude: latitude,
-            longitude: longitude,
-            latitudeDelta: 0.0032,
-            longitudeDelta: 0.0031,
-          }}
-        >
-          { /* google maps street overlay */}
-          <UrlTile
-            urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
-          /> 
-          {markers}
-        </MapView>
+  return (
+    <View style={{ zIndex: -1 }}>
+      <MapView
+        style={globalStyles.mapStyle}
+        showsUserLocation={true}
+        followsUserLocation={false}
+        showsPointsOfInterest={false}
+        showsIndoors={false}
+        showsBuildings={false}
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={mapStyle}
+        // provider='google'
+        // mapType='satellite'
+        region={{
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.0032,
+          longitudeDelta: 0.0031,
+        }}
+      >
 
-        { /* display components for tour */}
-        {started ? null : <Start startTour={startTour} />}
-        {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
-        {inTransit ? <DestinationName locations={locations} id={id} /> : null}
+        <MapViewDirections
+          origin={coordinates[0]}
+          destination={coordinates[1]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="lightgreen"
+          mode="WALKING"
+        />
+        <MapViewDirections
+          origin={coordinates[1]}
+          destination={coordinates[2]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="blue"
+          mode="WALKING"
+        />
+        <MapViewDirections
+          origin={coordinates[2]}
+          destination={coordinates[3]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="blue"
+          mode="WALKING"
+        />
+        <MapViewDirections
+          origin={coordinates[3]}
+          destination={coordinates[4]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="blue"
+          mode="WALKING"
+        />
+        <MapViewDirections
+          origin={coordinates[4]}
+          destination={coordinates[5]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="blue"
+          mode="WALKING"
+        />
+        <MapViewDirections
+          origin={coordinates[5]}
+          destination={coordinates[6]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="blue"
+          mode="WALKING"
+        />
+        <MapViewDirections
+          origin={coordinates[6]}
+          destination={coordinates[7]}
+          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+          strokeWidth={3}
+          strokeColor="blue"
+          mode="WALKING"
+        />
 
 
-        {showInfo ? (
-          <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
-        ) : null}
+        { /* google maps street overlay */}
+        <UrlTile
+          urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
+        />
+        {markers}
+      </MapView>
 
-        <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
-        { /* info button to toggle Modal */}
-        <TouchableOpacity style={globalStyles.modalToggle}>
-          <View>
-            <MaterialIcons
-              name='info'
-              size={28}
-              onPress={() => setLearnMore(true)}
-            />
-          </View>
-        </TouchableOpacity>
+      { /* display components for tour */}
+      {started ? null : <Start startTour={startTour} />}
+      {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
+      {inTransit ? <DestinationName locations={locations} id={id} /> : null}
 
-        <WelcomeScreen endTour={endTour} />
 
-      </View>
-    );
-    
+      {showInfo ? (
+        <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
+      ) : null}
+
+      <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
+      { /* info button to toggle Modal */}
+      <TouchableOpacity style={globalStyles.modalToggle}>
+        <View>
+          <MaterialIcons
+            name='info'
+            size={28}
+            onPress={() => setLearnMore(true)}
+          />
+        </View>
+      </TouchableOpacity>
+
+      <WelcomeScreen endTour={endTour} />
+
+    </View>
+  );
+
 };
 
 const mapStyle = [
@@ -183,5 +251,5 @@ const mapStyle = [
     featureType: 'poi',
     stylers: [{ visibility: 'off' }],
   },
-  
+
 ];
