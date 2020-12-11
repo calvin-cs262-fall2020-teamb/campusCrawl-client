@@ -66,6 +66,7 @@ export default function Markers() {
     setInfoShow(false);
     setTransitStatus(false);
     setID(0);
+    currentLocation();
   };
 
   const arriveAtLocation = () => {
@@ -100,6 +101,20 @@ export default function Markers() {
       setLongitude(location.coords.longitude);
     })();
   }, []);
+
+  const currentLocation = () => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    });
+  }
 
   // Handle errors
   let text = "Waiting..";
