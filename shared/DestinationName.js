@@ -25,7 +25,7 @@ export default function DestinationName({ locations, id }) {
                                 name="location"
                                 size={28}
                                 color="white"
-                            />
+                                                            />
                         {/* not sure why this conditional is needed because it seems like it would always be true. but it shows an error when you press the last stop otherwise. */}
                         {tourStop
                             ? <Text style={styles.text}>{tourStop.name}</Text> : null}

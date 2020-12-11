@@ -19,13 +19,13 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
 
     // progress meters for each stop
     const images = [
-        require('../images/1.jpg'),
-        require('../images/2.jpg'),
-        require('../images/3.jpg'),
-        require('../images/4.jpg'),
-        require('../images/5.jpg'),
-        require('../images/6.jpg'),
-        require('../images/7.jpg'),
+        require('../images/1.png'),
+        require('../images/2.png'),
+        require('../images/3.png'),
+        require('../images/4.png'),
+        require('../images/5.png'),
+        require('../images/6.png'),
+        require('../images/7.png'),
     ];
 
 
@@ -70,8 +70,6 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
     return (
        
         <View style={styles.bar}>
-          
-
             <View style={{ flexDirection: "row", marginTop: 5, justifyContent: 'center', height: "37%", marginBottom: 10 }}>
                 <TouchableOpacity style={[styles.button, { flexDirection: "row" }]} onPress={ quitConfirmation }>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>QUIT  </Text>
@@ -79,9 +77,9 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
                 </TouchableOpacity>
                 
                 {locations.filter((item) => item.id === id + 2)[0]
-                    ? <TouchableOpacity style={[styles.button, { marginLeft: 15, width: "22%", flexDirection: "row", backgroundColor: "#97252B" }]} onPress={ skipConfirmation }>
-                        <Text style={{ fontSize: 20, color: '#fff', fontFamily: 'Lato-Regular' }}>SKIP  </Text>
-                        <Feather name="skip-forward" size={22} color="#fff" />
+                    ? <TouchableOpacity style={[styles.button, { marginLeft: 15, width: "22%", flexDirection: "row" }]} onPress={ skipConfirmation }>
+                        <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>SKIP  </Text>
+                        <Feather name="skip-forward" size={22} color="#3b3b3b" />
                     </TouchableOpacity> : null}
 
                 <TouchableOpacity style={[styles.button, { marginLeft: 10, width: "45%", backgroundColor: "#E8CC16", borderRadius: 25, flexDirection: "row" }]} onPress={() => { arriveAtLocation(); }}>
@@ -90,9 +88,7 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
                 </TouchableOpacity>
                 
             </View>
-            
             <Image style={styles.progressBar} source={images[id]}/>
-
         </View>
         
 

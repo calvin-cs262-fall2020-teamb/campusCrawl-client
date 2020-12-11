@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
         shadowColor: '#A0A0A0',
         shadowOffset: { width: 0, height: -5 },
         shadowOpacity: 0.8,
+        width: '100%'
     },
     title: {
         fontFamily: 'Lato-Regular',
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
         zIndex: 32,
         top: 5,
         alignSelf: 'center',
-        width: 375,
+        width: '100%',
         paddingVertical: 5,
         borderRadius: 10,
     },
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
         height: 2000,
         backgroundColor: '#F2F2F2',
         zIndex: 35,
-        width: 390,
+        width: '100%',
         alignSelf: 'center',
         top: 210,
         borderRadius: 8,
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
 
     },
     buttonwrap: {
-        backgroundColor: '#3b3b3b',
+        backgroundColor: 'white',
         height: 90,
         width: '100%',
         bottom: 0,
