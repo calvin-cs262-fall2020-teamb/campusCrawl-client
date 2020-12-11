@@ -66,7 +66,6 @@ export default function Markers() {
     setInfoShow(false);
     setTransitStatus(false);
     setID(0);
-    currentLocation();
   };
 
   const arriveAtLocation = () => {
@@ -75,8 +74,6 @@ export default function Markers() {
       setInfoShow(true),
       setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
   }
-
-  const origin = { latitude: latitude, longitude: longitude }
 
   // Load data from webservice
   useEffect(() => {
@@ -101,20 +98,6 @@ export default function Markers() {
       setLongitude(location.coords.longitude);
     })();
   }, []);
-
-  const currentLocation = () => {
-    (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude);
-    });
-  }
 
   // Handle errors
   let text = "Waiting..";
@@ -200,14 +183,14 @@ export default function Markers() {
 
         {id === 0 ?
           <MapViewDirections
-            origin={origin}
+            origin={{ latitude: latitude, longitude: longitude }}
             destination={coordinates[0]}
             apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
             strokeWidth={3}
             strokeColor="lightgreen"
             mode="WALKING"
           />
-          : null}
+        : null}
         <MapViewDirections
           origin={coordinates[0]}
           destination={coordinates[1]}
@@ -287,5 +270,5 @@ export default function Markers() {
 
 
     </View>
-  );
-
+  )
+}

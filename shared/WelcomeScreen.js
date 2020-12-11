@@ -30,8 +30,8 @@ export default function WelcomeScreen({ endTour, setLearnMore }) {
   // makes the modal go away and resets the tour sequence
   const pressHandler = () => {
     setWelcomeScreen(false);
+    setLearnMore(true);
     endTour();
-    setLearnMore();
   };
 
   return (
@@ -50,29 +50,6 @@ export default function WelcomeScreen({ endTour, setLearnMore }) {
         </TouchableOpacity>
       </View>
     </Modal>
-
-    /* <View style={styles.welcome}>
-     *      <Text style={{ fontSize: 25, color: '#DC0000', }}>
-     *       Welcome To Campus Crawl!
-     *      </Text>
-     *     <View style={{borderBottomColor: '#A9A9A9', borderBottomWidth: 1, paddingBottom: 40,}}>
-     *       <Text style={{ fontSize: 15, paddingTop: 20, fontStyle: 'italic' }}>
-     *         Calvin University's virtual campus tour app
-     *       </Text>
-     *     </View>
-     *     <View style={styles.button1}>
-     *       <Button title='Start a Tour' color='#000'/>
-     *     </View>
-     *     <View style={styles.button2}>
-     *       <Button title='Learn More' color='#fff'/>
-     *     </View>
-     *     <TouchableOpacity onPress={() => { changeShow() }}>
-     *       <View style={styles.close}>
-     *         <AntDesign name='close' size={28} color='#808080'/>
-     *       </View>
-     *     </TouchableOpacity>
-     *   </View>
-     */
   );
 }
 
