@@ -22,7 +22,7 @@ import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
 import { MaterialIcons } from '@expo/vector-icons';
-import { MapViewDirections } from 'react-native-maps-directions'
+import MapViewDirections from 'react-native-maps-directions'
 
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
@@ -49,7 +49,7 @@ export default function Markers() {
   };
   const startTour = () => {
     setStart(true);
-    setRegion(42.930548, -85.58581);
+    // setRegion(42.930548, -85.58581);
     setTransitStatus(true);
   };
   const nextStop = () => {
@@ -73,8 +73,9 @@ export default function Markers() {
       setID(id + 1),
       setInfoShow(true),
       setRegion(locations.filter(item => item.id === id + 1)[0].latitude, locations.filter(item => item.id === id + 1)[0].longitude)
-
   }
+
+  const origin = { latitude: latitude, longitude: longitude }
 
   // Load data from webservice
   useEffect(() => {
@@ -111,8 +112,39 @@ export default function Markers() {
   // Array of Stops
   const coordinates = [
     {
-      latitude: ,
-      longitude
+      /* Stop 1 */
+      latitude: 42.930548,
+      longitude: -85.58581
+    },
+    {
+      /* Stop 2 */
+      latitude: 42.92965,
+      longitude: -85.58762
+    },
+    /* Stop 3 */
+    {
+      latitude: 42.9293,
+      longitude: -85.58845
+    },
+    {
+      /* Stop 4 */
+      latitude: 42.93095,
+      longitude: -85.58926
+    },
+    {
+      /* Stop 5 */
+      latitude: 42.93301,
+      longitude: -85.58917
+    },
+    {
+      /* Stop 6 */
+      latitude: 42.9333,
+      longitude: -85.58635
+    },
+    {
+      /* Stop 7 */
+      latitude: 42.93125,
+      longitude: -85.58701
     }
   ]
 
@@ -140,10 +172,9 @@ export default function Markers() {
         showsPointsOfInterest={false}
         showsIndoors={false}
         showsBuildings={false}
-        provider={PROVIDER_GOOGLE}
-        customMapStyle={mapStyle}
-        // provider='google'
-        // mapType='satellite'
+        //provider={PROVIDER_GOOGLE}
+        provider='google'
+        mapType='satellite'
         region={{
           latitude: latitude,
           longitude: longitude,
@@ -152,12 +183,22 @@ export default function Markers() {
         }}
       >
 
+        {id === 0 ?
+          <MapViewDirections
+            origin={origin}
+            destination={coordinates[0]}
+            apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
+            strokeWidth={3}
+            strokeColor="lightgreen"
+            mode="WALKING"
+          />
+          : null}
         <MapViewDirections
           origin={coordinates[0]}
           destination={coordinates[1]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor="lightgreen"
+          strokeColor={id === 1 ? "lightgreen" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -165,7 +206,7 @@ export default function Markers() {
           destination={coordinates[2]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor="blue"
+          strokeColor={id === 2 ? "lightgreen" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -173,7 +214,7 @@ export default function Markers() {
           destination={coordinates[3]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor="blue"
+          strokeColor={id === 3 ? "lightgreen" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -181,7 +222,7 @@ export default function Markers() {
           destination={coordinates[4]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor="blue"
+          strokeColor={id === 4 ? "lightgreen" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -189,7 +230,7 @@ export default function Markers() {
           destination={coordinates[5]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor="blue"
+          strokeColor={id === 5 ? "lightgreen" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -197,23 +238,12 @@ export default function Markers() {
           destination={coordinates[6]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor="blue"
-          mode="WALKING"
-        />
-        <MapViewDirections
-          origin={coordinates[6]}
-          destination={coordinates[7]}
-          apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
-          strokeWidth={3}
-          strokeColor="blue"
+          strokeColor={id === 6 ? "lightgreen" : "blue"}
           mode="WALKING"
         />
 
 
-        { /* google maps street overlay */}
-        <UrlTile
-          urlTemplate={"https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"}
-        />
+
         {markers}
       </MapView>
 
