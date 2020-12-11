@@ -15,9 +15,9 @@
  */
 
 import React, { useState, useEffect } from "react";
-import MapView, { Marker, UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker,  } from "react-native-maps";
 import * as Location from "expo-location";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity,  } from "react-native";
 import Start from "./startButton";
 import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
@@ -187,7 +187,6 @@ export default function Markers() {
         showsPointsOfInterest={false}
         showsIndoors={false}
         showsBuildings={false}
-        //provider={PROVIDER_GOOGLE}
         provider='google'
         mapType='satellite'
         region={{
@@ -197,6 +196,7 @@ export default function Markers() {
           longitudeDelta: 0.0031,
         }}
       >
+
 
         {id === 0 ?
           <MapViewDirections
@@ -257,8 +257,6 @@ export default function Markers() {
           mode="WALKING"
         />
 
-
-
         {markers}
       </MapView>
 
@@ -275,26 +273,19 @@ export default function Markers() {
       <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
       { /* info button to toggle Modal */}
       <TouchableOpacity style={globalStyles.modalToggle}>
-        <View>
+        <View style={{ backgroundColor:"black", borderRadius:15 }}> 
           <MaterialIcons
             name='info'
-            size={28}
+            size={30}
             onPress={() => setLearnMore(true)}
+            color='white'
           />
         </View>
       </TouchableOpacity>
 
-      <WelcomeScreen endTour={endTour} />
+      <WelcomeScreen endTour={endTour} setLearnMore={setLearnMore} />
+
 
     </View>
   );
 
-};
-
-const mapStyle = [
-  {
-    featureType: 'poi',
-    stylers: [{ visibility: 'off' }],
-  },
-
-];

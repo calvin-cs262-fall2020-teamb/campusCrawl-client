@@ -15,20 +15,23 @@ import {
   Modal,
 } from "react-native";
 import PropTypes from 'prop-types';
+// import { AboutScreen } from './AboutScreen';
 
 
 // create a welcome screen upon opening the app
-export default function WelcomeScreen({ endTour }) {
+export default function WelcomeScreen({ endTour, setLearnMore }) {
   const [welcomeScreen, setWelcomeScreen] = useState(true);
 
   // validate property of endTour as function
   WelcomeScreen.propTypes = { endTour: PropTypes.func };
+  WelcomeScreen.propTypes = { setLearnMore: PropTypes.func };
 
   // called when "Let's Go" button is pressed
   // makes the modal go away and resets the tour sequence
   const pressHandler = () => {
     setWelcomeScreen(false);
     endTour();
+    setLearnMore();
   };
 
   return (

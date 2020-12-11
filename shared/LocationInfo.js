@@ -12,6 +12,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import HTML from "react-native-render-html";
 
 // create a screen that shows the information of a location
 export default function LocationInfo({ locations, nextStop, endTour, id }) {
@@ -41,10 +42,13 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
     );
 
     return (
-        <View style={{ height: 850, zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%' }}>
-            <ScrollView style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} bounces="false">
+        <View style={{ height: '90%', zIndex: 30, position: 'absolute', backgroundColor: 'transparent', bottom: 0, width: '100%'}}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{alignItems: 'center'}} style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10,  padding: 5 }} bounces="false">
                 { /* empty element in ScrollView to start infoContainer lower */}
                 <View style={styles.clear}>
+                </View>
+                <View style={styles.grabber}>
+
                 </View>
                 { /* second element in ScrollView, location info */}
                 <View style={styles.infoContainer}>
@@ -52,9 +56,10 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
                         <Text style={styles.title}>{tourStop.greeting}</Text>
                     </View>
                     <Image style={styles.image} source={{ uri: tourStop.image }} />
-                    <View style={styles.infowrap}>
-                        <Text style={styles.info}>{tourStop.description}</Text>
-                    </View>
+                    <ScrollView contentContainerStyle={{paddingBottom: 1640}} nestedScrollEnabled={true} style={styles.infowrap}>
+                        <HTML style={{ paddingBottom: 800,}} source={{ html: tourStop.description}} />
+                        {/* <Text style={styles.info}>{tourStop.description}</Text> */}
+                    </ScrollView>
                 </View>
             </ScrollView>
 
@@ -82,10 +87,17 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
 
 const styles = StyleSheet.create({
     clear: {
-        height: 440,
+        height: 350,
+    },
+    grabber: {
+        backgroundColor: "lightgray",
+        height: 8,
+        width: 80,
+        marginBottom: 5,
+        borderRadius: 8
     },
     infoContainer: {
-        height: 1140,
+        height: 595,
         backgroundColor: '#97252B',
         zIndex: 30,
         borderTopStartRadius: 10,
@@ -114,7 +126,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         paddingHorizontal: 8,
         paddingVertical: 5,
-        height: 900,
+        height: 2000,
         backgroundColor: '#F2F2F2',
         zIndex: 35,
         width: 390,
@@ -130,7 +142,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         zIndex: 38,
         textAlign: 'justify',
-        color: '#000'
+        color: '#000',
+
     },
     buttonwrap: {
         backgroundColor: '#3b3b3b',
