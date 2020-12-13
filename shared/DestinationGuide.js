@@ -28,7 +28,7 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
         require('../images/7.png'),
     ];
 
-
+    // confirmation in case Skip or Quit accidently pressed
     const nextID = id + 1;
     const skipConfirmation = () =>
     Alert.alert(
@@ -71,27 +71,29 @@ export default function DestinationGuide({ locations, id, endTour, skipStop, arr
        
         <View style={styles.bar}>
             <View style={{ flexDirection: "row", marginTop: 5, justifyContent: 'center', height: "37%", marginBottom: 10 }}>
+                { /* quit button */ }
                 <TouchableOpacity style={[styles.button, { flexDirection: "row" }]} onPress={ quitConfirmation }>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>QUIT  </Text>
                     <AntDesign name="closecircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
                 
+                { /* only show skip button if NOT last stop */ }
                 {locations.filter((item) => item.id === id + 2)[0]
                     ? <TouchableOpacity style={[styles.button, { marginLeft: 15, width: "22%", flexDirection: "row" }]} onPress={ skipConfirmation }>
                         <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular' }}>SKIP  </Text>
                         <Feather name="skip-forward" size={22} color="#3b3b3b" />
                     </TouchableOpacity> : null}
 
+                { /* I'm There button, brings up location info */ }
                 <TouchableOpacity style={[styles.button, { marginLeft: 10, width: "45%", backgroundColor: "#E8CC16", borderRadius: 25, flexDirection: "row" }]} onPress={() => { arriveAtLocation(); }}>
                     <Text style={{ fontSize: 20, color: '#3b3b3b', fontFamily: 'Lato-Regular', textAlign: 'center' }}>I&apos;M THERE   </Text>
                     <AntDesign name="checkcircleo" size={22} color="#3b3b3b" />
                 </TouchableOpacity>
                 
             </View>
+            { /* progress bar to show number of stops and which one you are heading towards */ }
             <Image style={styles.progressBar} source={images[id]}/>
         </View>
-        
-
     );
 }
 
@@ -119,7 +121,6 @@ const styles = StyleSheet.create({
         
         backgroundColor: '#C0C0C0',
         paddingVertical: 12,
-        // paddingHorizontal: 15,
         width: "22%",
         borderRadius: 5,
         shadowColor: "#000",

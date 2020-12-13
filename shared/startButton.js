@@ -17,6 +17,7 @@ export default function Start({ startTour }) {
 
     return (
         <View style={styles.bar}>
+            {/* start button */}
             <TouchableOpacity style={styles.start} onPress={() => { 
                 startTour(); 
                 }}
@@ -47,12 +48,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 40,
         width: 240,
-        // paddingHorizontal: 10,
         height: 50,
-        // paddingVertical: 13,
         alignSelf: 'center',
         justifyContent: 'center',
-        // backgroundColor: '#FFD700',
         backgroundColor: '#E8CC16',
         borderRadius: 25,
         shadowColor: "#000",

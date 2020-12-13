@@ -29,9 +29,11 @@ export default function AboutScreen({ learnMore, setLearnMore }) {
                         onPress={() => setLearnMore(false)}
                         style={globalStyles.closeLearn}
                     />
+                    { /* header */ }
                     <Text style={globalStyles.learnHeader}>
                         About Campus Crawl
                     </Text>
+                    { /* body of information */ }
                     <View style={globalStyles.learnText}>
                         <Image style={globalStyles.calvinImage} source={require('../images/calvincampus.jpg' )} />
                         <Text style={globalStyles.infoText}>

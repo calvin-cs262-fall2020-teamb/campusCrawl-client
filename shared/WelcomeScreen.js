@@ -6,16 +6,8 @@
  */
 
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
+import { StyleSheet, Text, View, Platform, TouchableOpacity, Modal } from "react-native";
 import PropTypes from 'prop-types';
-// import { AboutScreen } from './AboutScreen';
 
 
 // create a welcome screen upon opening the app
@@ -45,6 +37,7 @@ export default function WelcomeScreen({ endTour, setLearnMore }) {
             Calvin University&apos;s virtual campus tour app
           </Text>
         </View>
+        {/* Let's Go button to dismiss the modal */}
         <TouchableOpacity style={styles.button1} onPress={pressHandler}>
           <Text style={styles.buttonText}>LET&apos;S GO!</Text>
         </TouchableOpacity>
@@ -60,10 +53,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     bottom: 15,
     padding: 12,
-    // width: 150,
-    // height: 44,
     justifyContent: "center",
-    // backgroundColor: "#FFD700",
     backgroundColor: "#97252B",
     borderRadius: 10,
     shadowColor: Platform.OS === "ios" ? "#808080" : null,
