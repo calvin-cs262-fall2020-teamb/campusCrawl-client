@@ -23,7 +23,6 @@ import LocationInfo from "./LocationInfo";
 import DestinationGuide from "./DestinationGuide";
 import { MaterialIcons } from '@expo/vector-icons';
 import MapViewDirections from 'react-native-maps-directions'
-
 import WelcomeScreen from "./WelcomeScreen";
 import AboutScreen from "./AboutScreen";
 import DestinationName from "./DestinationName";
@@ -49,7 +48,6 @@ export default function Markers() {
   };
   const startTour = () => {
     setStart(true);
-    // setRegion(42.930548, -85.58581);
     setTransitStatus(true);
   };
   const nextStop = () => {
@@ -155,7 +153,6 @@ export default function Markers() {
         longitude: marker.longitude,
       }}
       title={marker.name}
-
     >
     </Marker>
   ));
@@ -163,6 +160,7 @@ export default function Markers() {
 
   return (
     <View style={{ zIndex: -1 }}>
+      {/* show map with user location */}
       <MapView
         style={globalStyles.mapStyle}
         showsUserLocation={true}
@@ -180,14 +178,14 @@ export default function Markers() {
         }}
       >
 
-
+        {/* change color of active route */}
         {id === 0 ?
           <MapViewDirections
             origin={{ latitude: latitude, longitude: longitude }}
             destination={coordinates[0]}
             apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
             strokeWidth={3}
-            strokeColor="lightgreen"
+            strokeColor="#E8CC16"
             mode="WALKING"
           />
         : null}
@@ -196,7 +194,7 @@ export default function Markers() {
           destination={coordinates[1]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor={id === 1 ? "lightgreen" : "blue"}
+          strokeColor={id === 1 ? "#E8CC16" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -204,7 +202,7 @@ export default function Markers() {
           destination={coordinates[2]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor={id === 2 ? "lightgreen" : "blue"}
+          strokeColor={id === 2 ? "#E8CC16" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -212,7 +210,7 @@ export default function Markers() {
           destination={coordinates[3]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor={id === 3 ? "lightgreen" : "blue"}
+          strokeColor={id === 3 ? "#E8CC16" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -220,7 +218,7 @@ export default function Markers() {
           destination={coordinates[4]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor={id === 4 ? "lightgreen" : "blue"}
+          strokeColor={id === 4 ? "#E8CC16" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -228,7 +226,7 @@ export default function Markers() {
           destination={coordinates[5]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor={id === 5 ? "lightgreen" : "blue"}
+          strokeColor={id === 5 ? "#E8CC16" : "blue"}
           mode="WALKING"
         />
         <MapViewDirections
@@ -236,7 +234,7 @@ export default function Markers() {
           destination={coordinates[6]}
           apikey="AIzaSyAbmQJoOivpC-ZvBkcRUVzP4jAszcUoD6Y"
           strokeWidth={3}
-          strokeColor={id === 6 ? "lightgreen" : "blue"}
+          strokeColor={id === 6 ? "#E8CC16" : "blue"}
           mode="WALKING"
         />
 
@@ -247,14 +245,12 @@ export default function Markers() {
       {started ? null : <Start startTour={startTour} />}
       {inTransit ? <DestinationGuide locations={locations} endTour={endTour} skipStop={skipStop} arriveAtLocation={arriveAtLocation} id={id} /> : null}
       {inTransit ? <DestinationName locations={locations} id={id} /> : null}
-
-
       {showInfo ? (
         <LocationInfo locations={locations} nextStop={nextStop} endTour={endTour} id={id} />
       ) : null}
 
       <AboutScreen learnMore={learnMore} setLearnMore={setLearnMore} />
-      { /* info button to toggle Modal */}
+      { /* info button to show About Screen */}
       <TouchableOpacity style={globalStyles.modalToggle}>
         <View style={{ backgroundColor:"black", borderRadius:15 }}> 
           <MaterialIcons
@@ -266,8 +262,8 @@ export default function Markers() {
         </View>
       </TouchableOpacity>
 
+      {/* show welcome screen upon opening the app */}
       <WelcomeScreen endTour={endTour} setLearnMore={setLearnMore} />
-
 
     </View>
   )

@@ -26,6 +26,7 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
     LocationInfo.propTypes = { endTour: PropTypes.func };
     LocationInfo.propTypes = { id: PropTypes.number };
 
+    // confirmation in case Quit accidently pressed
     const quitConfirmation = () =>
     Alert.alert(
       "Quit tour",
@@ -56,9 +57,9 @@ export default function LocationInfo({ locations, nextStop, endTour, id }) {
                         <Text style={styles.title}>{tourStop.greeting}</Text>
                     </View>
                     <Image style={styles.image} source={{ uri: tourStop.image }} />
+                    {/* scrollview containing the location information */}
                     <ScrollView contentContainerStyle={{paddingBottom: 1640}} nestedScrollEnabled={true} style={styles.infowrap}>
                         <HTML style={{ paddingBottom: 800,}} source={{ html: tourStop.description}} />
-                        {/* <Text style={styles.info}>{tourStop.description}</Text> */}
                     </ScrollView>
                 </View>
             </ScrollView>
@@ -160,10 +161,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 24,
         zIndex: 35,
-        // backgroundColor: '#FFD700',
         backgroundColor: '#E8CC16',
         paddingVertical: 12,
-        // paddingHorizontal: 15,
         width: 210,
         borderRadius: 25,
         shadowColor: "#000",
@@ -179,7 +178,6 @@ const styles = StyleSheet.create({
         zIndex: 35,
         backgroundColor: '#C0C0C0',
         paddingVertical: 12,
-        // paddingHorizontal: 15,
         width: 100,
         borderRadius: 5,
         shadowColor: "#000",
